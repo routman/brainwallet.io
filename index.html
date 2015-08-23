@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>brainwallet.io - deterministic bitcoin address generator</title>
+	<meta name="description" content="Open source client-side javascript deterministic bitcoin address generator.  Store bitcoin in your brain."/>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+	<link rel='stylesheet' href='style.css'/>
+	<script src="js/jquery-2.1.0.min.js"></script>
+	<script src="js/bitcoinjs-min.js"></script>
+	<script src="js/qrcode.js"></script>
+	<script src="js/filedrop-min.js"></script>
+	<script src="js/brainwallet.js"></script>
+</head>
+<body>
+
+<div id="header">
+	<div class="outer">
+  		<div id="title" class="inner">
+			<a href="https://brainwallet.io">brainwallet.io</a>
+  		</div>
+  	</div>
+</div>
+<div id="content" class="outer">
+	<div class="inner">
+		<form id="passform">
+			<p class="label">Passphrase:</p>
+			<textarea id="passphrase" class=".fd-zone" type="text" placeholder="enter text or drag file here"></textarea>
+			<div id="filebutton" class="formsubmit">
+				select file
+				<input type="file" id="file" name="file"/>
+			</div>
+			<p class="label">Name:</p>
+			<input id="name" type="text" placeholder="your full name">
+			<p class="label">Email:</p>
+			<input id="email" type="text" placeholder="your email address">
+			<p class="label">Phone:</p>
+			<input id="number" type="text" placeholder="your phone number">
+			<p class="label">Date of Birth:</p>
+			<input id="birth" type="text" placeholder="your date of birth">
+			<input id="submit" class="formsubmit" type="submit" value="generate">
+		</form>
+		<div id="progressbar"></div>
+		<div id="result">
+			<p class="resultlabel">Public Address (SHARE):</p>
+			<p id="addr"></p>
+			<div id="addrQR"></div>
+			<p class="resultlabel">Private Key (SECRET):</p>
+			<p id="private"></p>
+			<div id="privateQR"></div>
+		</div>
+	</div>
+</div>
+<div id="about">
+	<div class="outer">
+		<div class="inner">
+			<p class="label">About brainwallet.io</p>
+			<p>
+				Brainwallet.io is a deterministic bitcoin address generator.  Store bitcoin in your brain by remembering your passphrase.  Enter your name, email, phone number, and date of birth for added security.  Address generation takes place in your browser, and no information is ever sent to our servers.<br>  
+				<br>
+				Use a long, unique passphrase that is never used in any song, literature, or media.  We recommend a minimum of 8 random words.  If you forget your passphrase, your bitcoin will be lost forever.<br>
+				<br>
+				Instead of entering a passphrase, you can drop any file into the text box and your browser will perform an SHA256 hash on the file to derive a checksum. This checksum will be used as your passphrase. The file hashing takes place in your browser, and never gets sent to or stored on our servers. It's important to never use a file that exists on the internet, and to keep it stored securely.  We recommend using a photograph that you have taken.<br>
+				<br>
+				Brainwallet.io uses the <a href="https://en.wikipedia.org/wiki/Scrypt" target="_blank">scrypt</a> key derivation function to generate bitcoin addresses.  Your name, email address, phone number, and date of birth are combined and used as a <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)" targe="_blank">salt</a>. These fields are optional, but they significantly increase the strength of your brainwallet and they are effortless to remember. Be sure to check for accuracy when you enter your information, and remember how you format your phone number and date of birth (slashes, dashes, dots, etc).<br>
+				<br>
+				The process is as follows (pseudocode):<br>
+				<li>key = scrypt(passphrase, salt=name+email+phone+birth, N=2<sup>18</sup>, r=8, p=1, dkLen=32)</li>
+				<li>keypair = generate_bitcoin_keypair(sha256(key))</li>
+				<br>
+				Scrypt is a memory-intensive function that is deliberately slow to frustrate brute-force attacks.  Performance may vary depending on your hardware, and in some cases may not work at all.  If you run into problems, try a different web browser or use a newer computer.  We can't sacrifice security for legacy support.<br>
+				<br>
+			</p>
+			<p class="label">Terms of use</p>
+			<p>
+				By using brainwallet.io, you are agreeing to the following terms and conditions.<br>
+				<br>
+				The service is provided on an "as is" basis, without any warranties.<br>
+				<br>
+				We are not responsible for any losses in bitcoin that you may incur for any reason.<br>
+				<br>
+			</p>
+			<p class="label">Created by</p>
+			<p>
+				Daniel Routman<br>
+				<a href="mailto:routman@protonmail.ch">routman@protonmail.ch</a><br>
+				<br>
+				Donate: 1G65KRrVxRw4FM8bHuiBia2CqChTeEHWuS<br>
+				<br>
+				Brainwallet.io is licensed under The MIT License (MIT)
+			</p>
+		</div>
+	</div>
+</div>
+<div id="footer" class="outer">
+	<div class="inner">
+		<div id="footerright">
+			<p><a href="https://github.com/routman/brainwallet.io" target="_blank">GitHub Repository</a></p>
+		</div>
+		<div id="footerleft">
+			<p>brainwallet.io &copy 2015</p>
+		</div>
+	</div>
+</div>
+</body>
+</html>
