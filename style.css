@@ -121,7 +121,7 @@ textarea {
 
 #mode {
 	overflow: auto;
-	width: 280px;
+	width: 420px;
 	border: 1px solid #575757;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -129,8 +129,15 @@ textarea {
     border-radius: 4px;
 }
 
+#personal, #generic {
+	border-left: 1px solid #575757;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
 .modebutton {
-	width: 50%;
+	width: 33.3333%;
 	line-height: 40px;
 	font-size: 17px;
 	font-weight: 200;
@@ -151,13 +158,6 @@ textarea {
 	box-shadow: inset 0 4px 10px #D4D4D4;
 }
 
-#personal {
-	border-left: 1px solid #575757;
-	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
-}
-
 .saltinput {
 	display: block;
 	border: 1px solid #575757;
@@ -173,7 +173,7 @@ textarea {
 
 }
 
-#personalsalt {
+#personalsalt, #genericsalt {
 	display: none;
 }
 
@@ -243,6 +243,8 @@ textarea {
 	.inner {padding: 0 12px;}	
 	#private {font-size: 12px;}
 	#about {font-size: 14px;}
+	#mode {width: 100%;}
+	.modebutton {font-size: 15px;}
 }
 
 @media screen and (max-width: 400px) {	
@@ -253,4 +255,5 @@ textarea {
 @media screen and (max-width: 360px) {	
 	#addr {font-size: 14px;}
 	#private {font-size: 9px;}
+	.modebutton {font-size: 13px;}
 }

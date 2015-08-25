@@ -4722,6 +4722,13 @@ var scrypt = require('scryptsy');
               salts[3] = $('#personalsalt4').val(); 
             }
 
+            if (mode == 2) { //generic salt
+              salts[0] = $('#genericsalt1').val();
+              salts[1] = "";
+              salts[2] = "";
+              salts[3] = "";
+            }
+
             salt = salts[0]+salts[1]+salts[2]+salts[3];
 
             if (!passphrase) {
@@ -4748,16 +4755,30 @@ var scrypt = require('scryptsy');
           mode = 0;
           $('#login').addClass("active");
           $('#personal').removeClass("active");
+          $('#generic').removeClass("active");
           $('#loginsalt').show();
           $('#personalsalt').hide();
+          $('#genericsalt').hide();
         });
 
         $('#personal').click(function() {
           mode = 1;
           $('#login').removeClass("active");
           $('#personal').addClass("active");
+          $('#generic').removeClass("active");
           $('#loginsalt').hide();
           $('#personalsalt').show();
+          $('#genericsalt').hide();
+        });
+
+        $('#generic').click(function() {
+          mode = 2;
+          $('#login').removeClass("active");
+          $('#personal').removeClass("active");
+          $('#generic').addClass("active");
+          $('#loginsalt').hide();
+          $('#personalsalt').hide();
+          $('#genericsalt').show();
         });
         
         //FILE DROP

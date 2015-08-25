@@ -36,6 +36,7 @@
 			<div id="mode">
 				<div id="login" class="modebutton active" >login info</div>
 				<div id="personal" class="modebutton">personal info</div>
+				<div id="generic" class="modebutton">generic</div>
 			</div>
 
 			<div id="saltinfo">
@@ -60,6 +61,11 @@
 				<input id="personalsalt3" class="saltinput" type="text" placeholder="enter your phone number">
 				<p class="label">Date of Birth:</p>
 				<input id="personalsalt4" class="saltinput" type="text" placeholder="enter your date of birth">
+			</div>
+
+			<div id="genericsalt">
+				<p class="label">Salt:</p>
+				<input id="genericsalt1" class="saltinput" type="text" placeholder="enter a salt">
 			</div>
 
 			<input id="submit" class="formsubmit" type="submit" value="generate">
@@ -89,7 +95,7 @@
 				<br>
 				Brainwallet.io uses the <a href="https://en.wikipedia.org/wiki/Scrypt" target="_blank">scrypt</a> key derivation function to generate bitcoin addresses.  Your salt inputs are concatenated and used as the salt for the scrypt function.<br>
 				<br>
-				You have the choice between two differet salt types. If you select "login info", enter a username, password, and PIN that you already have memorized. If you select "personal info", be sure to check for accuracy when you enter your information, and remember how you format your phone number and date of birth (slashes, dashes, dots, etc).<br>
+				You have the choice between three differet salt types. If you select "login info", enter a username, password, and PIN that you already have memorized. If you select "personal info", be sure to check for accuracy when you enter your information, and remember how you format your phone number and date of birth (slashes, dashes, dots, etc).  For "generic", you have the freedom to chose your own salt.  Just be sure to use something that you will never forget.<br>
 				<br>
 				The process is as follows (pseudocode):<br>
 				<li>key = scrypt(passphrase, salt, N=2<sup>18</sup>, r=8, p=1, dkLen=32)</li>
