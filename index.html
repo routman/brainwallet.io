@@ -31,15 +31,39 @@
 				select file
 				<input type="file" id="file" name="file"/>
 			</div>
-			<p class="label">Name:</p>
-			<input id="name" type="text" placeholder="your full name">
-			<p class="label">Email:</p>
-			<input id="email" type="text" placeholder="your email address">
-			<p class="label">Phone:</p>
-			<input id="number" type="text" placeholder="your phone number">
-			<p class="label">Date of Birth:</p>
-			<input id="birth" type="text" placeholder="your date of birth">
+
+			<p class="label">Choose your salt type:</p>
+			<div id="mode">
+				<div id="login" class="modebutton active" >login info</div>
+				<div id="personal" class="modebutton">personal info</div>
+			</div>
+
+			<div id="saltinfo">
+				Your <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)" target="_blank">salts</a> are used as additional inputs to the cryptographic function that generates your brainwallet.  This information never gets sent to our server, and is only used to strengthen your passphrase.  There is no recovery process, so don't forget what you enter.
+			</div>
+
+			<div id="loginsalt">
+				<p class="label">Username:</p>
+				<input id="loginsalt1" class="saltinput" type="text" placeholder="enter a username">
+				<p class="label">Password:</p>
+				<input id="loginsalt2" class="saltinput" type="text" placeholder="enter a password">
+				<p class="label">4 Digit PIN:</p>
+				<input id="loginsalt3" class="saltinput" type="text" placeholder="enter a 4 digit PIN">
+			</div>
+
+			<div id="personalsalt">
+				<p class="label">Name:</p>
+				<input id="personalsalt1" class="saltinput" type="text" placeholder="enter your full name">
+				<p class="label">Email:</p>
+				<input id="personalsalt2" class="saltinput" type="text" placeholder="enter your email address">
+				<p class="label">Phone:</p>
+				<input id="personalsalt3" class="saltinput" type="text" placeholder="enter your phone number">
+				<p class="label">Date of Birth:</p>
+				<input id="personalsalt4" class="saltinput" type="text" placeholder="enter your date of birth">
+			</div>
+
 			<input id="submit" class="formsubmit" type="submit" value="generate">
+
 		</form>
 		<div id="progressbar"></div>
 		<div id="result">
@@ -57,16 +81,18 @@
 		<div class="inner">
 			<p class="label">About brainwallet.io</p>
 			<p>
-				Brainwallet.io is a deterministic bitcoin address generator.  Store bitcoin in your brain by remembering your passphrase.  Enter your name, email, phone number, and date of birth for added security.  Address generation takes place in your browser, and no information is ever sent to our servers.<br>  
+				Brainwallet.io is a deterministic bitcoin address generator.  Store bitcoin in your brain by remembering your passphrase.  Enter salts for added security.  Address generation takes place in your browser, and no information is ever sent to our server.<br>  
 				<br>
 				Use a long, unique passphrase that is never used in any song, literature, or media.  We recommend a minimum of 8 random words.  If you forget your passphrase, your bitcoin will be lost forever.<br>
 				<br>
-				Instead of entering a passphrase, you can drop any file into the text box and your browser will perform an SHA256 hash on the file to derive a checksum. This checksum will be used as your passphrase. The file hashing takes place in your browser, and never gets sent to or stored on our servers. It's important to never use a file that exists on the internet, and to keep it stored securely.  We recommend using a photograph that you have taken.<br>
+				Instead of entering a passphrase, you can drop any file into the text box and your browser will perform an SHA256 hash on the file to derive a checksum. This checksum will be used as your passphrase. The file hashing takes place in your browser, and never gets sent to or stored on our server. It's important to never use a file that exists on the internet, and to keep it stored securely.  We recommend using a photograph that you have taken.<br>
 				<br>
-				Brainwallet.io uses the <a href="https://en.wikipedia.org/wiki/Scrypt" target="_blank">scrypt</a> key derivation function to generate bitcoin addresses.  Your name, email address, phone number, and date of birth are combined and used as a <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)" targe="_blank">salt</a>. These fields are optional, but they significantly increase the strength of your brainwallet and they are effortless to remember. Be sure to check for accuracy when you enter your information, and remember how you format your phone number and date of birth (slashes, dashes, dots, etc).<br>
+				Brainwallet.io uses the <a href="https://en.wikipedia.org/wiki/Scrypt" target="_blank">scrypt</a> key derivation function to generate bitcoin addresses.  Your salt inputs are concatenated and used as the salt for the scrypt function.<br>
+				<br>
+				You have the choice between two differet salt types. If you select "login info", enter a username, password, and PIN that you already have memorized. If you select "personal info", be sure to check for accuracy when you enter your information, and remember how you format your phone number and date of birth (slashes, dashes, dots, etc).<br>
 				<br>
 				The process is as follows (pseudocode):<br>
-				<li>key = scrypt(passphrase, salt=name+email+phone+birth, N=2<sup>18</sup>, r=8, p=1, dkLen=32)</li>
+				<li>key = scrypt(passphrase, salt, N=2<sup>18</sup>, r=8, p=1, dkLen=32)</li>
 				<li>keypair = generate_bitcoin_keypair(sha256(key))</li>
 				<br>
 				Scrypt is a memory-intensive function that is deliberately slow to frustrate brute-force attacks.  Performance may vary depending on your hardware, and in some cases may not work at all.  If you run into problems, try a different web browser or use a newer computer.  We can't sacrifice security for legacy support.<br>

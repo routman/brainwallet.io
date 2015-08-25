@@ -4573,11 +4573,10 @@ var scrypt = require('scryptsy');
 	var PUBLIC_KEY_VERSION = 0;
   var PRIVATE_KEY_VERSION = 0x80;
 
+  var mode = 0;
+
   var passphrase;
-  var name;
-  var email;
-  var num;
-  var birth;
+  var salts = [];
   var salt;
 
   //scrypt parameters
@@ -4706,34 +4705,62 @@ var scrypt = require('scryptsy');
         	event.preventDefault();
         	
             $('#result').hide();            
-            $('#submit').val('running...');
 
             passphrase = $('#passphrase').val();
-            name = $('#name').val();
-            email = $('#email').val();
-            num = $('#number').val();
-            birth = $('#birth').val();
 
-            salt = name+email+num+birth;
+            if (mode == 0) { //login salts
+              salts[0] = $('#loginsalt1').val();
+              salts[1] = $('#loginsalt2').val();
+              salts[2] = $('#loginsalt3').val();
+              salts[3] = "";
+            }
 
-            setTimeout(scryptRun,0);
-           	
+            if (mode == 1) { //personal salts
+              salts[0] = $('#personalsalt1').val();
+              salts[1] = $('#personalsalt2').val();
+              salts[2] = $('#personalsalt3').val();
+              salts[3] = $('#personalsalt4').val(); 
+            }
 
+            salt = salts[0]+salts[1]+salts[2]+salts[3];
+
+            if (!passphrase) {
+              alert("You must enter a passphrase");
+            }
+            else if (!salt) {
+              alert("You must enter at least one salt")
+            }
+            else {
+              $('#submit').val('running...');
+              setTimeout(scryptRun,0);
+            }
         });
 
-        $('#name').keydown(function(event){
+        $('.saltinput').keydown(function(event){
             if(event.keyCode == 13) {
                 event.preventDefault();
                 return false;
             }
         });
-        $('#email').keydown(function(event){
-            if(event.keyCode == 13) {
-                event.preventDefault();
-                return false;
-            }
+
+        //MODE SELECTION
+        $('#login').click(function() {
+          mode = 0;
+          $('#login').addClass("active");
+          $('#personal').removeClass("active");
+          $('#loginsalt').show();
+          $('#personalsalt').hide();
+        });
+
+        $('#personal').click(function() {
+          mode = 1;
+          $('#login').removeClass("active");
+          $('#personal').addClass("active");
+          $('#loginsalt').hide();
+          $('#personalsalt').show();
         });
         
+        //FILE DROP
         var zone = new FileDrop('passphrase');
         zone.event('send', function (files) {
             files.each(function (file) {

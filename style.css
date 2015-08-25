@@ -119,7 +119,46 @@ textarea {
 	cursor: pointer;
 }
 
-#name, #email, #number, #birth {
+#mode {
+	overflow: auto;
+	width: 280px;
+	border: 1px solid #575757;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    border-radius: 4px;
+}
+
+.modebutton {
+	width: 50%;
+	line-height: 40px;
+	font-size: 17px;
+	font-weight: 200;
+	float: left;
+	background: none;
+	cursor: pointer;
+	text-align: center;
+}
+
+#saltinfo {
+	font-size: 14px;
+	margin-top: 4px;
+	color: #666666;
+}
+
+.active {
+	background: #F1F1F1;
+	box-shadow: inset 0 4px 10px #D4D4D4;
+}
+
+#personal {
+	border-left: 1px solid #575757;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.saltinput {
 	display: block;
 	border: 1px solid #575757;
 	width: 100%;
@@ -132,6 +171,10 @@ textarea {
 	padding: 8px;
 	font-size: 16px;
 
+}
+
+#personalsalt {
+	display: none;
 }
 
 #submit {
