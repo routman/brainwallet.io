@@ -4569,8 +4569,8 @@ function base64DetectIncompleteChar(buffer) {
 var scrypt = require('scryptsy');
 
 (function($){
-	var gen_compressed = false;
-	var PUBLIC_KEY_VERSION = 0;
+  var gen_compressed = false;
+  var PUBLIC_KEY_VERSION = 0;
   var PRIVATE_KEY_VERSION = 0x80;
 
   var mode = 0;
@@ -4578,6 +4578,8 @@ var scrypt = require('scryptsy');
   var passphrase;
   var salts = [];
   var salt;
+
+  var busy = 0;
 
   //scrypt parameters
   var N = Math.pow(2,18);
@@ -4694,6 +4696,7 @@ var scrypt = require('scryptsy');
 	   			var scryptData = success.data;
 	   			makeAddr(scryptData.toString('hex'));
 		      $('#result').show();
+		      busy = 0;
 	   		},split
 	   	);
    		
@@ -4703,44 +4706,47 @@ var scrypt = require('scryptsy');
 	$(document).ready( function() {
         $('#passform').submit(function(event) {
         	event.preventDefault();
-        	
-            $('#result').hide();            
 
-            passphrase = $('#passphrase').val();
+        	if (busy == 0) {
+        		busy = 1;
+	            $('#result').hide();            
 
-            if (mode == 0) { //login salts
-              salts[0] = $('#loginsalt1').val();
-              salts[1] = $('#loginsalt2').val();
-              salts[2] = $('#loginsalt3').val();
-              salts[3] = "";
-            }
+	            passphrase = $('#passphrase').val();
 
-            if (mode == 1) { //personal salts
-              salts[0] = $('#personalsalt1').val();
-              salts[1] = $('#personalsalt2').val();
-              salts[2] = $('#personalsalt3').val();
-              salts[3] = $('#personalsalt4').val(); 
-            }
+	            if (mode == 0) { //login salts
+	              salts[0] = $('#loginsalt1').val();
+	              salts[1] = $('#loginsalt2').val();
+	              salts[2] = $('#loginsalt3').val();
+	              salts[3] = "";
+	            }
 
-            if (mode == 2) { //generic salt
-              salts[0] = $('#genericsalt1').val();
-              salts[1] = "";
-              salts[2] = "";
-              salts[3] = "";
-            }
+	            if (mode == 1) { //personal salts
+	              salts[0] = $('#personalsalt1').val();
+	              salts[1] = $('#personalsalt2').val();
+	              salts[2] = $('#personalsalt3').val();
+	              salts[3] = $('#personalsalt4').val(); 
+	            }
 
-            salt = salts[0]+salts[1]+salts[2]+salts[3];
+	            if (mode == 2) { //generic salt
+	              salts[0] = $('#genericsalt1').val();
+	              salts[1] = "";
+	              salts[2] = "";
+	              salts[3] = "";
+	            }
 
-            if (!passphrase) {
-              alert("You must enter a passphrase");
-            }
-            else if (!salt) {
-              alert("You must enter at least one salt")
-            }
-            else {
-              $('#submit').val('running...');
-              setTimeout(scryptRun,0);
-            }
+	            salt = salts[0]+salts[1]+salts[2]+salts[3];
+
+	            if (!passphrase) {
+	              alert("You must enter a passphrase");
+	            }
+	            else if (!salt) {
+	              alert("You must enter at least one salt")
+	            }
+	            else {
+	              $('#submit').val('running...');
+	              setTimeout(scryptRun,0);
+	            }
+	        }
         });
 
         $('.saltinput').keydown(function(event){
