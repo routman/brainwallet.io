@@ -114,6 +114,14 @@
         }
     }
 
+    function random() {
+        var pk = secureRandom(32);
+        var seed = Crypto.util.bytesToHex(pk.slice(0,16));
+        //nb! electrum doesn't handle trailing zeros very well
+        if (seed.charAt(0) == '0') seed = seed.substr(1);
+        $('#passphrase').val(mn_encode(seed));
+    }
+
 	$(document).ready( function() {
         $('#passform').submit(function(event) {
         	event.preventDefault();
@@ -180,6 +188,11 @@
                 event.preventDefault();
                 return false;
             }
+        });
+
+        //RANDOM PASSPHRASE
+        $('#random').click(function() {
+			random();
         });
 
         //MODE SELECTION

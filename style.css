@@ -59,6 +59,12 @@ textarea {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+#random {
+	float: left;
+	text-align: center;
+	margin-bottom: 24px;
+}
+
 .fd-zone {
 	position: relative;
 	overflow: hidden;
