@@ -1,3 +1,12 @@
+/*
+secure-random 
+A simple JavaScript component to normalize the creation of cryptographically strong random values.
+
+(MIT License)
+
+Copyright 2013-2014, JP Richardson
+*/
+
 !function(globals){
 'use strict'
 
