@@ -208,6 +208,16 @@ textarea {
   	font-size: 18px;
 }
 
+#print {
+	margin-top: 24px;
+	text-align: center;
+
+}
+#print a {
+	text-decoration: none;
+	color: #000000;
+}
+
 #about {
 	background: #EEEEEE;
 	width: 100%;
@@ -223,7 +233,6 @@ textarea {
 #footer a {
 	margin: 0;
 	text-decoration: none;
-
 }
 #footer a:visited {
 	text-decoration: none;
