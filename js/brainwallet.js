@@ -12,11 +12,10 @@
 	var salt;
 
 	//scrypt parameters
-	var N = Math.pow(2,18);
+	var logN = 18;
 	var r = 8;
-	var p = 1;
 	var L = 32;
-	var steps = 256;
+	var step = 2048;  //iterations per step
 
 	function pad(str, len, ch) {
         padding = '';
@@ -165,20 +164,18 @@
 	            }
 	            else {
 	            	$('#submit').val('running...');
-
-	            	passphrase = scrypt.encode_utf8(passphrase);
-            		salt = scrypt.encode_utf8(salt); 
 	              	
-	              	scrypt.crypto_scrypt_async(passphrase, salt, N, r, p, L,
-			            function(success, result) {
-				   			makeAddr(scrypt.to_hex(result));
+	              	scrypt(passphrase, salt, logN, r, L, step,
+	              		function(progress) {
+			                $('#progressbar').width(progress +'%');
+			            },
+			            function(result) {
+			            	$('#progressbar').width('100%');
+				   			makeAddr(result);
 					      	$('#result').show();
 					      	busy = 0;
 			            },
-			            function(progress) {
-			                $('#progressbar').width(progress +'%');
-			            },
-			        steps);
+			        "hex");
 	            }
 	        }
         });
