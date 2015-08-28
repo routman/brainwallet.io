@@ -46,10 +46,6 @@
 				<div id="generic" class="modebutton">generic</div>
 			</div>
 
-			<div id="saltinfo">
-				Your <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)" target="_blank">salts</a> are used as additional inputs to the cryptographic function that generates your brainwallet.  This information never gets sent to our server, and is only used to strengthen your passphrase.  There is no recovery process, so don't forget what you enter.
-			</div>
-
 			<div id="loginsalt">
 				<p class="label">Username:</p>
 				<input id="loginsalt1" class="saltinput" type="text" placeholder="enter a username">
@@ -87,7 +83,9 @@
 			<p id="private"></p>
 			<div id="privateQR"></div>
 			
-			<div id="print" class="formsubmit"><a href="javascript:window.print()">print</a></div>
+			<a id="print" href="javascript:window.print()">
+				<div class="formsubmit">print</div>
+			</a>
 		</div>
 	</div>
 </div>
@@ -96,15 +94,15 @@
 		<div class="inner">
 			<p class="label">About brainwallet.io</p>
 			<p>
-				Brainwallet.io is a deterministic bitcoin address generator.  Store bitcoin in your brain by remembering your passphrase.  Enter salts for added security.  Address generation takes place in your browser, and no information is ever sent to our server.<br>  
+				Brainwallet.io is a deterministic bitcoin address generator.  Store bitcoin in your brain by remembering your passphrase and salts.  Address generation takes place in your browser, and no information is ever sent to our server.<br>  
 				<br>
-				Use a long, unique passphrase that is never used in any song, literature, or media.  We recommend a minimum of 8 random words.  Click the "random" button to have a secure 12-word passphrase generated for you.  Always write down your passphrase.  If you forget your passphrase, your bitcoin will be lost forever.<br>
+				Use a long, unique passphrase that is never used in any song, literature, or media.  If you use a weak passphrase, you are at risk of having your bitcoin stolen.  We recommend a minimum of 8 random words.  Click the "random" button to have a secure 12-word passphrase generated for you.  If you forget your passphrase, your bitcoin will be lost forever.<br>
+				<br>
+				Your <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)" target="_blank">salts</a> are used as additional inputs to the cryptographic function that generates your brainwallet.  This information never gets sent to our server, and is only used to strengthen your passphrase.  There is no recovery process, so don't forget what you enter.<br>
 				<br>
 				Instead of entering a passphrase, you can drop any file into the text box and your browser will perform an SHA256 hash on the file to derive a checksum. This checksum will be used as your passphrase. The file hashing takes place in your browser, and never gets sent to or stored on our server. It's important to never use a file that exists on the internet, and to keep it stored securely.  We recommend using a photograph that you have taken.<br>
 				<br>
 				Brainwallet.io uses the <a href="https://en.wikipedia.org/wiki/Scrypt" target="_blank">scrypt</a> key derivation function to generate bitcoin addresses.  Your salt inputs are concatenated and used as the salt for the scrypt function.<br>
-				<br>
-				You have the choice between three differet salt categories.  Remember which one you selected, and enter information that you will never forget.  These inputs are case sensitive, and you must remember exactly how you format data such as your phone number or date of birth (slashes, dashes, dots, etc).  The "generic" salt gives you the freedom to chose your own salt.<br>
 				<br>
 				The process is as follows (pseudocode):<br>
 				<li>key = scrypt(passphrase, salt, N=2<sup>18</sup>, r=8, p=1, dkLen=32)</li>

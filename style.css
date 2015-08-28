@@ -45,7 +45,6 @@ html, body {
 	width: 100%;
 	max-width: 100%;
 	height: 120px;
-	margin-bottom: 4px;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box;         /* Opera/IE 8+ */
@@ -62,6 +61,7 @@ textarea {
 #random {
 	float: left;
 	text-align: center;
+	margin-top: 4px;
 	margin-bottom: 24px;
 }
 
@@ -99,12 +99,13 @@ textarea {
 	color: #000000;
 	font-size: 16px;
 	padding: 0;
-	line-height: 40px;
+	line-height: 38px;
 	cursor: pointer;
 }
 
 #filebutton {
-	float: right;
+	margin-top: 4px;
+	margin-left: 8px;
 	position: relative;
 	display: inline-block;
 	text-align: center;
@@ -153,12 +154,6 @@ textarea {
 	text-align: center;
 }
 
-#saltinfo {
-	font-size: 14px;
-	margin-top: 4px;
-	color: #666666;
-}
-
 .active {
 	background: #F1F1F1;
 	box-shadow: inset 0 4px 10px #D4D4D4;
@@ -176,7 +171,6 @@ textarea {
 	border-radius: 4px;
 	padding: 8px;
 	font-size: 16px;
-
 }
 
 #personalsalt, #genericsalt {
@@ -208,14 +202,18 @@ textarea {
   	font-size: 18px;
 }
 
-#print {
-	margin-top: 24px;
-	text-align: center;
-
+#private {
+	margin: 8px 0;
 }
-#print a {
+
+#print {
+	display: block;
+	width: 100px;
 	text-decoration: none;
 	color: #000000;
+	margin-top: 24px;
+	text-align: center;
+	overflow: auto;
 }
 
 #about {
