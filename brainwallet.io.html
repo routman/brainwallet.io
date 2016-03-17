@@ -1569,9 +1569,9 @@ docHead.appendChild(newLink);
 				<br>
 				<b>Disclaimer: </b>Use at your own risk.  Brainwallets can be dangerous if you don't use a strong passphrase or take security precautions.<br>
 				<br>
-				Use a long, unique passphrase that is never used in any song, literature, or media.  If you use a weak passphrase, you are at risk of having your bitcoin stolen.  We recommend a minimum of 8 random words.  Click the "random" button to have a secure 12-word passphrase generated for you.  If you forget your passphrase, your bitcoin will be lost forever.<br>
+				Use a long, unique passphrase that is never used in any song, literature, or media.  If you use a weak passphrase, you are at risk of having your bitcoin stolen.  We recommend a minimum of 8 random words.  Click the "random" button to have a secure 12-word passphrase generated for you.  If you forget your passphrase, your bitcoin will be lost forever.  Please keep in mind that your passphrase is case sensitive.<br>
 				<br>
-				Your <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)" target="_blank">salts</a> are used as additional inputs to the cryptographic function that generates your brainwallet.  This information never gets sent to our server, and is only used to strengthen your passphrase.  There is no recovery process, so don't forget what you enter.<br>
+				Your <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)" target="_blank">salts</a> are used as additional inputs to the cryptographic function that generates your brainwallet.  This information never gets sent to our server, and is only used to strengthen your passphrase.  You are required to enter at least one salt, and you have the ability to choose between different types of salts.  There is no recovery process, so don't forget what you enter.<br>
 				<br>
 				Instead of entering a passphrase, you can drop any file into the text box and your browser will perform an SHA256 hash on the file to derive a checksum. This checksum will be used as your passphrase. The file hashing takes place in your browser, and never gets sent to or stored on our server. It's important to never use a file that exists on the internet, and to keep it stored securely.  We recommend using a photograph that you have taken.<br>
 				<br>
@@ -1583,7 +1583,7 @@ docHead.appendChild(newLink);
 				<br>
 				Scrypt is a memory-intensive function that is deliberately slow to frustrate brute-force attacks.  Performance may vary depending on your hardware, and in some cases may not work at all.  If you run into problems, try a different web browser or use a newer computer.  We can't sacrifice security for legacy support.<br>
 				<br>
-				Brainwallet.io is a self-contained website that can be run offline.  We recommend that you download the HTML file from GitHub, verify file integrity with the PGP-signed changelog, and run it on an air-gapped computer.<br>
+				Brainwallet.io is a self-contained website that can be run offline.  We recommend that you download the HTML file from GitHub, verify file integrity (checksum) with the PGP-signed changelog, and run it on an air-gapped computer.<br>
 				<br>
 			</p>
 			<p class="label">Terms of use</p>
@@ -1598,7 +1598,7 @@ docHead.appendChild(newLink);
 			<p class="label">Created by</p>
 			<p>
 				Daniel Routman<br>
-				<a href="mailto:routman@protonmail.ch">routman@protonmail.ch</a><br>
+				<a href="mailto:routman@protonmail.com">routman@protonmail.com</a><br>
 				<br>
 				<a href="https://brainwallet.io/pgpkey.asc" target="_blank">PGP key</a><br>
 				EB6E BB0A 6C1B 762F B282<br>
@@ -1615,7 +1615,7 @@ docHead.appendChild(newLink);
 	<div class="inner">
 		<div id="footerright">
 			<div>
-				<a href="https://brainwallet.io/changelog.txt" target="_blank">Version History (v1.0.0)</a>
+				<a href="https://brainwallet.io/changelog.txt" target="_blank">Version History (v1.0.1)</a>
 			</div>
 			<div>
 				<a href="https://github.com/routman/brainwallet.io" target="_blank">GitHub Repository</a>
