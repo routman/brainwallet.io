@@ -2,12 +2,13 @@
 <html>
 <head>
 	<!--
-	brainwallet.io v1.1.0
-	Donation Address: 1G65KRrVxRw4FM8bHuiBia2CqChTeEHWuS
+	brainwallet.io v2.0.0
+	Bitcoin Donation Address: 1G65KRrVxRw4FM8bHuiBia2CqChTeEHWuS
+	Litecoin Donation Address: LYPwR2yRumYUYGgJkU7xhhy1FWCmUzeS33
 
 	Notice of Copyrights and Licenses:
 	***********************************
-	Copyright (c) 2015-2016 by Daniel Routman - brainwallet.io
+	Copyright (c) 2015-2018 by Daniel Routman - brainwallet.io
 	Licensed under the MIT license
 	The brainwallet.io name and logo are not part of the open source license.
 
@@ -25,7 +26,7 @@
 	CryptoJS v3.1.2			BSD License
 
 	The brainwallet.io software is available under The MIT License (MIT)
-	Copyright (c) 2015-2016 by Daniel Routman - brainwallet.io
+	Copyright (c) 2015-2018 by Daniel Routman - brainwallet.io
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
@@ -46,18 +47,24 @@
 	SOFTWARE.
 
 	-->
-	<title>brainwallet.io - deterministic bitcoin address generator</title>
-	<meta name="description" content="Open source client-side javascript deterministic bitcoin address generator.  Store bitcoin in your brain."/>
+	<title>Brainwallet.io - Deterministic Bitcoin and Litecoin Address Generator</title>
+	<meta name="description" content="Open source client-side javascript deterministic cryptocurrency address generator, currently supporting Bitcoin and Litecoin.  Store crypto in your brain."/>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 	<link rel="shortcut icon" href="#"/>
 
 	<style>
+
 html, body {
-	background: #FDFDFD;
+	background: #EFEFEF;
 	margin: 0;
 	height: 100%;
-	font-family: Arial, Helvetica, sans-serif;
+
+	font-family: Helvetica;
+	font-weight: 200;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: #909090;
 }
 
 .outer {
@@ -73,60 +80,79 @@ html, body {
 
 #header {
 	height: 48px;
-	background: #333333;
-	font-size: 20px;
+	background: #FFFFFF;
+	font-size: 16px;
 	line-height: 48px;
 }
 #header a {
   	text-decoration: none;
-  	color: #FBFBFB;
+  	color: #505050;
 }
 #header a:visited {
-  	color: #FBFBFB;
+  	color: #505050;
+}
+
+#title {
+	display: inline-block;
+}
+
+#info {
+	color: #505050;
+	display: inline-block;
+	float: right;
+}
+#info:hover {
+	color: #80e600;
+	cursor: pointer;
 }
 
 #content {
 	margin-bottom: 24px;
+	margin-top: 12px;
 }
 
 .label {
-	margin: 16px 0 4px 0;
-	font-size: 18px;
+	font-size: 14px;
 	clear: both;
+	float: left;
+	margin: 24px 0 4px 0;
+}
+
+.infoheader {
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	margin: 24px 0 -4px 0;
+}
+
+textarea, input {
+	font-family: Helvetica, sans-serif;
+	border-radius: 3px;
+	color: #808080;
+	background: #FFFFFF;
+	border: none;
+	box-sizing: border-box;
+}
+
+textarea:focus, input:focus{
+    outline: none;
 }
 
 #passphrase {
-	border: 1px solid #575757;
 	width: 100%;
 	max-width: 100%;
 	height: 120px;
-	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-	box-sizing: border-box;         /* Opera/IE 8+ */
-	-webkit-appearance: none;
-	border-radius: 4px;
-	padding: 8px;
+	padding: 8px 12px;
 	font-size: 16px;
 }
 
-textarea {
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-#random {
-	float: left;
-	text-align: center;
-	margin-top: 4px;
-	margin-bottom: 24px;
-}
 
 .fd-zone {
 	position: relative;
 	overflow: hidden;
 }
 
-.fd-zone.over { 
- 	border-color: maroon; background: #72FFA7; 
+.fd-zone.over {
+ 	border-color: maroon; background: #80e600;
 }
 
 .fd-file {
@@ -140,30 +166,36 @@ textarea {
 	filter: alpha(opacity=0);
 }
 
+.action {
+	display: inline-block;
+	float: right;
+	margin: 24px 0 4px 24px;
+	cursor: pointer;
+	font-size: 14px;
+}
+.action:hover {
+	color: #80e600;
+}
+
 
 .formsubmit {
-	border: 1px solid #575757;
-	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-	box-sizing: border-box;         /* Opera/IE 8+ */
-	-webkit-appearance: none;
-	border-radius: 4px;
-	height: 40px;
-	width: 100px;
+	width: 128px;
 	background: #FFFFFF;
-	color: #000000;
-	font-size: 16px;
+	color: #909090;
+	font-size: 14px;
 	padding: 0;
-	line-height: 38px;
+	line-height: 40px;
 	cursor: pointer;
+	-webkit-appearance: none;
+	border-radius: 3px;
+	font-weight: 200;
+}
+.formsubmit:hover {
+	color: #80e600;
 }
 
 #filebutton {
-	margin-top: 4px;
-	margin-left: 8px;
 	position: relative;
-	display: inline-block;
-	text-align: center;
 	overflow: hidden;
 	cursor: pointer;
 }
@@ -181,18 +213,36 @@ textarea {
 	cursor: pointer;
 }
 
+#currency {
+	overflow: auto;
+	width: 280px;
+	background: #FFFFFF;
+	clear: both;
+	border-radius: 3px;
+}
+.currencybutton {
+	width: 50%;
+	line-height: 40px;
+	font-size: 14px;
+	float: left;
+	background: none;
+	cursor: pointer;
+	text-align: center;
+}
+.currencybutton:hover {
+	color: #80e600;
+}
+
 #mode {
 	overflow: auto;
 	width: 420px;
-	border: 1px solid #575757;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
-    border-radius: 4px;
+	background: #FFFFFF;
+	clear: both;
+	border-radius: 3px;
 }
 
-#personal, #generic {
-	border-left: 1px solid #575757;
+#personal, #generic, #ltc {
+	border-left: 1px solid #EFEFEF;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
@@ -201,30 +251,26 @@ textarea {
 .modebutton {
 	width: 33.3333%;
 	line-height: 40px;
-	font-size: 17px;
-	font-weight: 200;
+	font-size: 14px;
 	float: left;
 	background: none;
 	cursor: pointer;
 	text-align: center;
 }
+.modebutton:hover {
+	color: #80e600;
+}
 
 .active {
-	background: #F1F1F1;
-	box-shadow: inset 0 4px 10px #D4D4D4;
+	color: #80e600;
 }
 
 .saltinput {
 	display: block;
-	border: 1px solid #575757;
 	width: 100%;
+	height: 40px;
 	margin: 0;
-	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-	box-sizing: border-box;         /* Opera/IE 8+ */
-	-webkit-appearance: none;
-	border-radius: 4px;
-	padding: 8px;
+	padding: 8px 12px;
 	font-size: 16px;
 }
 
@@ -233,13 +279,19 @@ textarea {
 }
 
 #submit {
-	margin-top: 24px;
+	margin-top: 40px;
+	border: none;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+#submit:hover {
+	color: #80e600;
 }
 
 #progressbar {
 	height: 12px;
 	margin-top: 24px;
-	background: #575757;
+	background: #80e600;
 	width: 0%;
 }
 
@@ -255,15 +307,21 @@ textarea {
 #addr {
   	margin: 8px 0;
   	font-size: 18px;
+	letter-spacing: 0px;
+	color: #666666;
+	text-transform: none;
 }
 
 #private {
 	margin: 8px 0;
+	font-size: 16px;
+	letter-spacing: 0px;
+	color: #666666;
+	text-transform: none;
 }
 
 #print {
 	display: block;
-	width: 100px;
 	text-decoration: none;
 	color: #000000;
 	margin-top: 24px;
@@ -272,53 +330,48 @@ textarea {
 }
 
 #about {
+	display: none;
 	background: #EEEEEE;
 	width: 100%;
+	text-transform: none;
+	letter-spacing: 0px;
 }
 
 #footer {
-	font-size: 16px;
-	line-height: 24px;
+	font-size: 13px;
 	padding: 8px 0;
 }
 
 #footer a {
 	text-decoration: none;
+	margin-right: 32px;
+	color: #909090;
 }
-#footer a:visited {
-	text-decoration: none;
-}
-
-#footerleft {
- 	float: left;
-}
-
-#footerright {
- 	float: right;
- 	text-align: right;
+#footer p {
+	display: inline-block;
 }
 
 @media screen and (max-width: 800px) {
 	.outer {width: 100%;}
-	.inner {padding: 0 12px;}	
+	.inner {padding: 0 12px;}
 	#private {font-size: 14px;}
 }
 
 @media screen and (max-width: 480px) {
 	.outer {width: 100%;}
-	.inner {padding: 0 12px;}	
+	.inner {padding: 0 12px;}
 	#private {font-size: 12px;}
 	#about {font-size: 14px;}
 	#mode {width: 100%;}
-	.modebutton {font-size: 15px;}
+	#currency {width: 100%;}
 }
 
-@media screen and (max-width: 400px) {	
+@media screen and (max-width: 400px) {
 	#addr {font-size: 16px;}
 	#private {font-size: 10px;}
 }
 
-@media screen and (max-width: 360px) {	
+@media screen and (max-width: 360px) {
 	#addr {font-size: 14px;}
 	#private {font-size: 9px;}
 	.modebutton {font-size: 13px;}
@@ -342,7 +395,7 @@ return d||(f=$b[b],$b[b]=e,e=null!=c(a,b,d)?b.toLowerCase():null,$b[b]=f),e}});v
 /**
  * BitcoinJS-lib v0.1.3-default
  * Copyright (c) 2011 BitcoinJS Project
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the MIT license.
  */
@@ -380,7 +433,7 @@ var TransactionDatabase=function(){this.txs=[],this.txIndex={}};EventEmitter.aug
 // Licensed under the MIT license:
 //   http://www.opensource.org/licenses/mit-license.php
 //
-// The word "QR Code" is registered trademark of 
+// The word "QR Code" is registered trademark of
 // DENSO WAVE INCORPORATED
 //   http://www.denso-wave.com/qrcode/faqpatent-e.html
 //
@@ -649,7 +702,7 @@ var mn_words = [
 
 	<script type="text/javascript">
 /*
-secure-random 
+secure-random
 A simple JavaScript component to normalize the creation of cryptographically strong random values.
 
 (MIT License)
@@ -1238,10 +1291,10 @@ d[e>>>5]|=128<<24-e%32;d[(e+64>>>9<<4)+14]=h.floor(b/4294967296);d[(e+64>>>9<<4)
 
 
 	<script type="text/javascript">
-// Copyright (c) 2015-2016 by Daniel Routman - brainwallet.io
+// Copyright (c) 2015-2018 by Daniel Routman - brainwallet.io
 // Licensed under the MIT license
 var favIcon = "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAGpSURBVHja7Jcxa8JQFIU/U4eiRboYxcHgIMWxxEFxkVA7OHZz8F84FPwDHfQPdFMHJ5u9KLgIRVxctNDJSQkZRJus7WJDbEtRMQkUz5QceDmH++47N88nyzJAEngAboAQzmIFdIF74M0PXAEvwCXuIATcAQqQOYvFYo/ANe7jHIgJm7J7hVvBhT3/CxfCvitarRaj0ehoDgQ8xsnAyYD/0IXFYhFFUUgkEkiSBICu63S7XWq12s7f8cmy/LHvMUylUtb7bDbDNE0Ai+/3+1QqFWcrUK/X6fV6aJpmcaIo0mw2yefz5HI5BoOBcz3Qbre3xAE0TaPRaACQzWa9acLxeAxANBr1xsBkMgEgEon8o2P42/Cxc+l02lkD0+nUeo7H4wSDwS3ODlEUATAM43gGyuXyjxywc3Ykk0kAFouFNz1QKBQAmM/n7hsolUooioJpmqiq6mwSdjodK4IBJEkiEAhYKfk9pI5mwDAMdF0nHA5bgl+DaDgcoqrqThF88DA6/ZA4YWDlof67sLkoeoVnAagCSw/El0BVAF6BDPAErF0QXm+0MsDr5wDCLoYExwD+DwAAAABJRU5ErkJggg==";
-var docHead = document.getElementsByTagName('head')[0];       
+var docHead = document.getElementsByTagName('head')[0];
 var newLink = document.createElement('link');
 newLink.rel = 'shortcut icon';
 newLink.href = 'data:image/png;base64,'+favIcon;
@@ -1249,9 +1302,8 @@ docHead.appendChild(newLink);
 
 (function($){
 	var gen_compressed = false;
-	var PUBLIC_KEY_VERSION = 0;
-	var PRIVATE_KEY_VERSION = 0x80;
 
+	var currency = 'btc';
 	var mode = 0;
 	var busy = 0;
 	var passphrase;
@@ -1290,6 +1342,10 @@ docHead.appendChild(newLink);
     }
 
     function makeAddr(phr) {
+
+		console.log(phr);
+
+
         var hash = Crypto.SHA256(phr, { asBytes: true });
         hash = Crypto.util.bytesToHex(hash);
         var hash_str = pad(hash, 64, '0');
@@ -1305,14 +1361,28 @@ docHead.appendChild(newLink);
         var hash160 = eckey.getPubKeyHash();
         var h160 = Crypto.util.bytesToHex(hash160);
         var addr = new Bitcoin.Address(hash160);
-        addr.version = PUBLIC_KEY_VERSION;
+
+		if (currency == 'btc') {
+			addr.version = 0x00;
+		}
+		else if (currency == 'ltc') {
+			addr.version = 0x30;
+		}
         $('#addr').text(addr);
+
         var payload = hash;
         if (compressed)
             payload.push(0x01);
         var sec = new Bitcoin.Address(payload);
-        sec.version = PRIVATE_KEY_VERSION;
+
+		if (currency == 'btc') {
+        	sec.version = 0x80;
+		}
+		else if (currency == 'ltc') {
+			sec.version = 0xb0;
+		}
         $('#private').text(sec);
+
         $('#privateQR').html('');
         privateQR = new QRCode("privateQR", {
             text: sec,
@@ -1344,11 +1414,11 @@ docHead.appendChild(newLink);
                     var filehash = CryptoJS.SHA256(CryptoJS.enc.Latin1.parse(r.result)).toString().toUpperCase();
                     $('#passphrase').val(filehash);
                 }
-            } 
-            else { 
+            }
+            else {
                 alert("Failed to load file.");
             }
-        } 
+        }
         else {
           alert('This feature is not supported by your browser.');
         }
@@ -1368,7 +1438,7 @@ docHead.appendChild(newLink);
 
         	if (busy == 0) {
         		busy = 1;
-	            $('#result').hide();            
+	            $('#result').hide();
 
 	            passphrase = $('#passphrase').val();
 
@@ -1383,7 +1453,7 @@ docHead.appendChild(newLink);
 	              	salts[0] = $('#personalsalt1').val();
 	              	salts[1] = $('#personalsalt2').val();
 	              	salts[2] = $('#personalsalt3').val();
-	              	salts[3] = $('#personalsalt4').val(); 
+	              	salts[3] = $('#personalsalt4').val();
 	            }
 
 	            if (mode == 2) { //generic salt
@@ -1394,7 +1464,7 @@ docHead.appendChild(newLink);
 	            }
 
 	            salt = salts[0]+salts[1]+salts[2]+salts[3];
-	            
+
 	            if (!passphrase) {
 	              	alert("You must enter a passphrase");
 	              	busy = 0;
@@ -1405,7 +1475,7 @@ docHead.appendChild(newLink);
 	            }
 	            else {
 	            	$('#submit').val('running...');
-	              	
+
 	              	scrypt(passphrase, salt, logN, r, L, step,
 	              		function(progress) {
 			                $('#progressbar').width(progress +'%');
@@ -1432,6 +1502,18 @@ docHead.appendChild(newLink);
         $('#random').click(function() {
 			random();
         });
+
+		//CURRENCY SELECTION
+		$('#btc').click(function() {
+			currency = 'btc';
+			$('#btc').addClass('active');
+			$('#ltc').removeClass('active');
+		});
+		$('#ltc').click(function() {
+			currency = 'ltc';
+			$('#btc').removeClass('active');
+			$('#ltc').addClass('active');
+		});
 
         //MODE SELECTION
         $('#login').click(function() {
@@ -1463,7 +1545,21 @@ docHead.appendChild(newLink);
 			$('#personalsalt').hide();
 			$('#genericsalt').show();
         });
-        
+
+		//clear results when input is changed
+		$('.modebutton').click(function() {
+			$('#result').hide();
+			$('#progressbar').width('0%');
+		});
+		$('.currencybutton').click(function() {
+			$('#result').hide();
+			$('#progressbar').width('0%');
+		});
+		$('textarea, input').on("change paste keyup", function() {
+			$('#result').hide();
+			$('#progressbar').width('0%');
+		});
+
         //filedrop
         $('#passphrase').on(
             'dragover',
@@ -1494,14 +1590,26 @@ docHead.appendChild(newLink);
                                 var filehash = CryptoJS.SHA256(CryptoJS.enc.Latin1.parse(r.result)).toString().toUpperCase();
                                 $('#passphrase').val(filehash);
                             }
-                        } 
-                        else { 
+                        }
+                        else {
                             alert("Failed to load file.");
                         }
-                    }   
+                    }
                 }
             }
         );
+
+		$('#info').click(function() {
+			$('#about').toggle();
+			$('#content').toggle();
+
+			if ($('#about').is(':visible')) {
+				$('#info').html('back');
+			}
+			else {
+				$('#info').html('info');
+			}
+		});
 
         //file selection handler
         document.getElementById('file').addEventListener('change', hashFile, false);
@@ -1514,54 +1622,64 @@ docHead.appendChild(newLink);
 
 <div id="header">
 	<div class="outer">
-  		<div id="title" class="inner">
-			<a href="https://brainwallet.io">brainwallet.io</a>
-  		</div>
+		<div class="inner">
+	  		<div id="title">
+				<a href="https://brainwallet.io">brainwallet.io</a>
+	  		</div>
+			<div id="info">
+				info
+			</div>
+		</div>
   	</div>
 </div>
 <div id="content" class="outer">
 	<div class="inner">
 		<form id="passform">
-			<p class="label">Passphrase:</p>
-			<textarea id="passphrase" class=".fd-zone" type="text" placeholder="enter text or drag file here"></textarea>
 
-			<div id="random" class="formsubmit">random</div>
+			<p class="label">Currency</p>
+			<div id="currency">
+				<div id="btc" class="currencybutton active">btc</div>
+				<div id="ltc" class="currencybutton">ltc</div>
+			</div>
 
-			<div id="filebutton" class="formsubmit">
+			<p class="label">Passphrase</p>
+			<div id="random" class="action">random</div>
+			<div id="filebutton" class="action">
 				select file
 				<input type="file" id="file" name="file"/>
 			</div>
+			<textarea id="passphrase" class=".fd-zone" type="text" placeholder=""></textarea>
 
-			<p class="label">Choose your salt:</p>
+			<p class="label">Salt Type</p>
 			<div id="mode">
-				<div id="login" class="modebutton active" >login info</div>
-				<div id="personal" class="modebutton">personal info</div>
+				<div id="login" class="modebutton active" >login</div>
+				<div id="personal" class="modebutton">personal</div>
 				<div id="generic" class="modebutton">generic</div>
 			</div>
 
 			<div id="loginsalt">
-				<p class="label">Username:</p>
-				<input id="loginsalt1" class="saltinput" type="text" placeholder="enter a username">
-				<p class="label">Password:</p>
-				<input id="loginsalt2" class="saltinput" type="text" placeholder="enter a password">
-				<p class="label">4 Digit PIN:</p>
-				<input id="loginsalt3" class="saltinput" type="text" placeholder="enter a 4 digit PIN">
+				<p class="label">Username</p>
+				<input id="loginsalt1" class="saltinput" type="text" placeholder="">
+				<p class="label">Password</p>
+				<input id="loginsalt2" class="saltinput" type="text" placeholder="">
+				<p class="label">4 Digit PIN</p>
+				<input id="loginsalt3" class="saltinput" type="text" placeholder="">
 			</div>
 
 			<div id="personalsalt">
-				<p class="label">Name:</p>
-				<input id="personalsalt1" class="saltinput" type="text" placeholder="enter your full name">
-				<p class="label">Email:</p>
-				<input id="personalsalt2" class="saltinput" type="text" placeholder="enter your email address">
-				<p class="label">Phone:</p>
-				<input id="personalsalt3" class="saltinput" type="text" placeholder="enter your phone number">
-				<p class="label">Date of Birth:</p>
-				<input id="personalsalt4" class="saltinput" type="text" placeholder="enter your date of birth">
+				<p class="label">Name</p>
+				<input id="personalsalt1" class="saltinput" type="text" placeholder="">
+				<p class="label">Email</p>
+				<input id="personalsalt2" class="saltinput" type="text" placeholder="">
+				<p class="label">Phone</p>
+				<input id="personalsalt3" class="saltinput" type="text" placeholder="">
+				<p class="label">Date of Birth</p>
+				<input id="personalsalt4" class="saltinput" type="text" placeholder="">
 			</div>
 
 			<div id="genericsalt">
-				<p class="label">Salt:</p>
-				<input id="genericsalt1" class="saltinput" type="text" placeholder="enter a salt">
+				<p class="label">SALT</p>
+				<input id="genericsalt1" class="saltinput" type="text" placeholder="">
 			</div>
 
 			<input id="submit" class="formsubmit" type="submit" value="generate">
@@ -1575,7 +1693,7 @@ docHead.appendChild(newLink);
 			<p class="resultlabel">Private Key (SECRET):</p>
 			<p id="private"></p>
 			<div id="privateQR"></div>
-			
+
 			<a id="print" href="javascript:window.print()">
 				<div class="formsubmit">print</div>
 			</a>
@@ -1585,13 +1703,13 @@ docHead.appendChild(newLink);
 <div id="about">
 	<div class="outer">
 		<div class="inner">
-			<p class="label">About brainwallet.io</p>
+			<p class="infoheader">About brainwallet.io</p>
 			<p>
-				Brainwallet.io is a deterministic bitcoin address generator.  Store bitcoin in your brain by remembering your passphrase and salts.  Address generation takes place in your browser, and no information is ever sent to our server.<br>  
+				Brainwallet.io is a deterministic cryptocurrecy address generator for Bitcoin and Litecoin that allows you to store crypto in your brain by remembering a passphrase and salts.  Address generation takes place in your browser, and no information is ever sent to our server.<br>
 				<br>
-				<b>Disclaimer: </b>Use at your own risk.  Brainwallets can be dangerous if you don't use a strong passphrase or take security precautions.<br>
+				<b>Disclaimer: </b>Use at your own risk.  Brainwallets can be dangerous if you don't know what you are doing.  You must use a strong passphrase and take security precautions to keep your crypto safe. By using brainwallet.io, you are agreeing to our Terms of Service (below).<br>
 				<br>
-				Use a long, unique passphrase that is never used in any song, literature, or media.  If you use a weak passphrase, you are at risk of having your bitcoin stolen.  We recommend a minimum of 8 random words.  Click the "random" button to have a secure 12-word passphrase generated for you.  If you forget your passphrase, your bitcoin will be lost forever.  Please keep in mind that your passphrase and salts are case sensitive.<br>
+				Use a long, unique passphrase that is never used in any song, literature, or media.  If you use a weak passphrase, you are at risk of having your crypto stolen.  We recommend a minimum of 8 random words.  Click the "random" button to have a secure 12-word passphrase generated for you.  If you forget your passphrase, your crypto will be lost forever.  Please keep in mind that your passphrase and salts are case sensitive.<br>
 				<br>
 				Your <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)" target="_blank">salts</a> are used as additional inputs to the cryptographic function that generates your brainwallet.  This information never gets sent to our server, and is only used to strengthen your passphrase.  You are required to enter at least one salt, and you have the ability to choose between different types of salts.  There is no recovery process, so don't forget what you enter.<br>
 				<br>
@@ -1599,36 +1717,42 @@ docHead.appendChild(newLink);
 				<br>
 				<b>Note: </b>If you have difficulty recovering your brainwallet using the file hashing functionality, please try <a href="https://brainwallet.io/brainwallet.io.v1.0.1.html">this</a> older version, which generated non-standard checksums with some file formats.  This has been corrected in the current version.<br>
 				<br>
-				Brainwallet.io uses the <a href="https://en.wikipedia.org/wiki/Scrypt" target="_blank">scrypt</a> key derivation function to generate bitcoin addresses.  Your salt inputs are concatenated and used as the salt for the scrypt function.<br>
+				Brainwallet.io uses the <a href="https://en.wikipedia.org/wiki/Scrypt" target="_blank">scrypt</a> key derivation function to generate cryptocurrency keys.  Your salt inputs are concatenated and used as the salt for the scrypt function.<br>
 				<br>
 				The process is as follows (pseudocode):<br>
 				<li>key = scrypt(passphrase, salt, N=2<sup>18</sup>, r=8, p=1, dkLen=32)</li>
-				<li>keypair = generate_bitcoin_keypair(sha256(key))</li>
+				<li>keypair = generate_keypair(sha256(key))</li>
 				<br>
 				Scrypt is a memory-intensive function that is deliberately slow to frustrate brute-force attacks.  Performance may vary depending on your hardware, and in some cases may not work at all.  If you run into problems, try a different web browser or use a newer computer.  We can't sacrifice security for legacy support.<br>
 				<br>
 				Brainwallet.io is a self-contained website that can be run offline.  We recommend that you download the latest HTML file from GitHub, verify file integrity (checksum) with the PGP-signed changelog, and run it on an air-gapped computer.  Keep a copy of the HTML file that you used to generate your brainwallet for safekeeping.<br>
 				<br>
 			</p>
-			<p class="label">Terms of use</p>
+			<p class="infoheader">Terms of Service</p>
 			<p>
-				By using brainwallet.io, you are agreeing to the following terms and conditions.<br>
+				These Terms of Service (“Terms”) govern your access to and use of brainwallet.io (“Service”), and any information, text, links, graphics, photos, videos, or other materials uploaded, downloaded or appearing on the Service (collectively referred to as “Content”). By using the Service you agree to be bound by these Terms.<br>
 				<br>
-				The service is provided on an "as is" basis, without any warranties.<br>
+				You are responsible for your use of this Service and for any Content you provide, including compliance with applicable laws, rules, and regulations.<br>
+				Your access to and use of the Service or any Content are at your own risk. You understand and agree that the Service is provided to you on an “AS IS” and “AS AVAILABLE” basis. We are not liable for any information stored with the Service or loss of data resulting from weak passphrases, malicious attacks, or database failures.<br>
 				<br>
-				We are not responsible for any losses in bitcoin that you may incur for any reason.<br>
+				In no event shall brainwallet.io be held liable for anything arising out of or in any way connected with your use of this Service whether such liability is under contract. Brainwallet.io shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this Service.<br>
+				<br>
+				Brainwallet.io is not responsible for any losses in cryptocurrecy that you may incur for any reason.<br>
+				<br>
+				We reserve the right to modify or terminate the Service for any reason, without notice at any time. We reserve the right to alter these Terms at any time.<br>
 				<br>
 			</p>
-			<p class="label">Created by</p>
+			<p class="infoheader">Created by</p>
 			<p>
 				Daniel Routman<br>
-				<a href="mailto:routman@protonmail.com">routman@protonmail.com</a><br>
+				<a href="mailto:daniel@ncrypt.org">daniel@ncrypt.org</a><br>
 				<br>
 				<a href="https://brainwallet.io/pgpkey.asc" target="_blank">PGP key</a><br>
 				EB6E BB0A 6C1B 762F B282<br>
 				A38A DE5F 7DB2 1B0B 3CCA<br>
 				<br>
-				Donate: 1G65KRrVxRw4FM8bHuiBia2CqChTeEHWuS<br>
+				Donate BTC: 1G65KRrVxRw4FM8bHuiBia2CqChTeEHWuS<br>
+				Donate LTC: LYPwR2yRumYUYGgJkU7xhhy1FWCmUzeS33<br>
 				<br>
 				Brainwallet.io is licensed under The MIT License (MIT)
 			</p>
@@ -1637,18 +1761,9 @@ docHead.appendChild(newLink);
 </div>
 <div id="footer" class="outer">
 	<div class="inner">
-		<div id="footerright">
-			<div>
-				<a href="https://brainwallet.io/changelog.txt" target="_blank">Version History (v1.1.0)</a>
-			</div>
-			<div>
-				<a href="https://github.com/routman/brainwallet.io" target="_blank">GitHub Repository</a>
-			</div>
-		</div>
-		<div id="footerleft">
-			<div>
-				brainwallet.io &copy 2015-2016
-			</div>
+				<a href="https://brainwallet.io/changelog.txt" target="_blank">Version History (v2.0.0)</a>
+				<a href="https://github.com/routman/brainwallet.io" target="_blank">GitHub</a>
+				<p>brainwallet.io &copy 2015-2018</p>
 		</div>
 	</div>
 </div>
