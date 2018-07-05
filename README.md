@@ -1,2 +1,2 @@
 # brainwallet.io
-Deterministic Bitcoin Address Generator
+Deterministic Bitcoin and Litecoin Address Generator
