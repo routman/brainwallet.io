@@ -2,7 +2,7 @@
 <html>
 <head>
 	<!--
-	brainwallet.io v2.0.2
+	brainwallet.io v2.1.0
 	Bitcoin Donation Address: 1G65KRrVxRw4FM8bHuiBia2CqChTeEHWuS
 	Litecoin Donation Address: LYPwR2yRumYUYGgJkU7xhhy1FWCmUzeS33
 
@@ -59,13 +59,13 @@
 html, body {
 	background: #f2f2f2;
 	margin: 0;
-	height: 100%;
+	height: auto;
 
 	font-family: Helvetica;
 	font-weight: 200;
 	letter-spacing: 2px;
 	text-transform: uppercase;
-	color: #909090;
+	color: #888888;
 }
 
 .green {
@@ -186,7 +186,7 @@ textarea:focus, input:focus{
 .formsubmit {
 	width: 128px;
 	background: #FFFFFF;
-	color: #909090;
+	color: #888888;
 	font-size: 14px;
 	padding: 0;
 	line-height: 40px;
@@ -302,7 +302,7 @@ textarea:focus, input:focus{
 }
 
 #result {
-  	display:none;
+  	display: none;
 }
 
 .resultlabel {
@@ -324,6 +324,51 @@ textarea:focus, input:focus{
 	letter-spacing: 0px;
 	color: #666666;
 	text-transform: none;
+}
+
+#printtitle {
+	display: none;
+	font-size: 18px;
+	clear: both;
+}
+#printtable {
+	display: none;
+	margin-bottom: -16px;
+}
+
+th {
+	width: 180px;
+	padding: 8px 0;
+	text-align: left;
+	vertical-align: top;
+	font-weight: 200;
+	letter-spacing: 2px;
+}
+
+td {
+	padding: 8px 0;
+}
+
+.presult {
+	text-transform: none;
+	display: inline-block;
+}
+
+.pheader {
+	font-size: 16px;
+	clear: both;
+	margin: 48px 0 8px 0;
+}
+
+.cb {
+	margin: 0;
+	width: 16px;
+}
+
+.cblabel {
+	font-size: 14px;
+	margin: 4px;
+	display: inline-block;
 }
 
 #print {
@@ -351,7 +396,7 @@ textarea:focus, input:focus{
 #footer a {
 	text-decoration: none;
 	margin-right: 32px;
-	color: #909090;
+	color: #888888;
 }
 #footer p {
 	display: inline-block;
@@ -385,11 +430,25 @@ textarea:focus, input:focus{
 }
 
 @media print {
-	#header, #passform, #progressbar, #print, #about, #footer {
+	#header, #passform, #progressbar, #poptions, #about, #footer {
 		display:none;
 	}
 	body {
 		background: white;
+	}
+	#printtitle {
+		display: block;
+	}
+	#printtable {
+		display: block;
+		letter-spacing: 0px;
+	}
+	#result {
+		margin: 64px;
+	}
+	@page {
+	    size: auto;   /* auto is the initial value */
+	    margin: 0;  /* this affects the margin in the printer settings */
 	}
 }
 
@@ -1353,10 +1412,6 @@ docHead.appendChild(newLink);
     }
 
     function makeAddr(phr) {
-
-		console.log(phr);
-
-
         var hash = Crypto.SHA256(phr, { asBytes: true });
         hash = Crypto.util.bytesToHex(hash);
         var hash_str = pad(hash, 64, '0');
@@ -1449,12 +1504,18 @@ docHead.appendChild(newLink);
 	            $('#result').hide();
 
 	            passphrase = $('#passphrase').val();
+				$('#p-passphrase').html(passphrase.replace(/\n/g, '<br />'));
 
 	            if (mode == 0) { //login salts
 					salts[0] = $('#loginsalt1').val();
 					salts[1] = $('#loginsalt2').val();
 					salts[2] = $('#loginsalt3').val();
 					salts[3] = "";
+
+					$('#p-label1').html('Username:');
+					$('#p-label2').html('Password:');
+					$('#p-label3').html('4-6 Digit PIN:');
+					$('#p-label4').html('');
 	            }
 
 	            if (mode == 1) { //personal salts
@@ -1462,6 +1523,11 @@ docHead.appendChild(newLink);
 	              	salts[1] = $('#personalsalt2').val();
 	              	salts[2] = $('#personalsalt3').val();
 	              	salts[3] = $('#personalsalt4').val();
+
+					$('#p-label1').html('Name:');
+					$('#p-label2').html('Email:');
+					$('#p-label3').html('Phone:');
+					$('#p-label4').html('Date of Birth:');
 	            }
 
 	            if (mode == 2) { //generic salt
@@ -1469,9 +1535,19 @@ docHead.appendChild(newLink);
 	              	salts[1] = "";
 	              	salts[2] = "";
 	              	salts[3] = "";
+
+					$('#p-label1').html('Salt:');
+					$('#p-label2').html('');
+					$('#p-label3').html('');
+					$('#p-label4').html('');
 	            }
 
 	            salt = salts[0]+salts[1]+salts[2]+salts[3];
+
+				$('#p-salt1').html(salts[0]);
+				$('#p-salt2').html(salts[1]);
+				$('#p-salt3').html(salts[2]);
+				$('#p-salt4').html(salts[3]);
 
 	            if (!passphrase) {
 	              	alert("You must enter a passphrase");
@@ -1493,7 +1569,7 @@ docHead.appendChild(newLink);
 				   			makeAddr(result);
 					      	$('#result').show();
 					      	busy = 0;
-							$("html, body").animate({ scrollTop: $(document).height() }, "fast");
+							$("html, body").animate({ scrollTop: $(document).height() }, "slow");
 			            },
 			        "hex");
 	            }
@@ -1517,11 +1593,13 @@ docHead.appendChild(newLink);
 			currency = 'btc';
 			$('#btc').addClass('active');
 			$('#ltc').removeClass('active');
+			$('#p-currency').html('BTC');
 		});
 		$('#ltc').click(function() {
 			currency = 'ltc';
 			$('#btc').removeClass('active');
 			$('#ltc').addClass('active');
+			$('#p-currency').html('LTC');
 		});
 
         //MODE SELECTION
@@ -1564,7 +1642,7 @@ docHead.appendChild(newLink);
 			$('#result').hide();
 			$('#progressbar').width('0%');
 		});
-		$('textarea, input').on("change paste keyup", function() {
+		$('#passphrase, .saltinput').on("change paste keyup", function() {
 			$('#result').hide();
 			$('#progressbar').width('0%');
 		});
@@ -1617,6 +1695,24 @@ docHead.appendChild(newLink);
 			}
 			else {
 				$('#info').html('info');
+			}
+		});
+
+		$('#hidepass').click(function() {
+			if (this.checked) {
+				$('th, td').hide();
+			}
+			else {
+				$('th, td').show();
+			}
+		});
+
+		$('#hidepriv').click(function() {
+			if (this.checked) {
+				$('#private, #privateQR, #privatelabel').hide();
+			}
+			else {
+				$('#private, #privateQR, #privatelabel').show();
 			}
 		});
 
@@ -1696,16 +1792,50 @@ docHead.appendChild(newLink);
 		</form>
 		<div id="progressbar"></div>
 		<div id="result">
+
+			<p id="printtitle">BRAINWALLET.IO</p>
+			<table id="printtable">
+				<tr>
+					<th>Currency:</th>
+					<td class="presult" id="p-currency">BTC</td>
+				</tr>
+				<tr>
+					<th>Passphrase:</th>
+					<td class="presult" id="p-passphrase"></td>
+				</tr>
+				<tr>
+					<th id="p-label1"></th>
+					<td class="presult" id="p-salt1"></td>
+				</tr>
+				<tr>
+					<th id="p-label2"></th>
+					<td class="presult" id="p-salt2"></td>
+				</tr>
+				<tr>
+					<th id="p-label3"></th>
+					<td class="presult" id="p-salt3"></td>
+				</tr>
+				<tr>
+					<th id="p-label4"></th>
+					<td class="presult" id="p-salt4"></td>
+				</tr>
+			</table>
+
 			<p class="resultlabel">Public Address (SHARE):</p>
 			<p id="addr"></p>
 			<div id="addrQR"></div>
-			<p class="resultlabel">Private Key (SECRET):</p>
+			<p class="resultlabel" id="privatelabel">Private Key (SECRET):</p>
 			<p id="private"></p>
 			<div id="privateQR"></div>
 
-			<a id="print" href="javascript:window.print()">
-				<div class="formsubmit">print</div>
-			</a>
+			<div id="poptions">
+				<p class="pheader">Printing Options</p>
+				<input type="checkbox" class="cb" id="hidepass"/><p class="cblabel">Hide Passphrase & Salts</p><br>
+				<input type="checkbox" class="cb" id="hidepriv"/><p class="cblabel">Hide Private Key</p>
+				<a id="print" href="javascript:window.print()">
+					<div class="formsubmit">print</div>
+				</a>
+			</div>
 		</div>
 	</div>
 </div>
@@ -1770,7 +1900,7 @@ docHead.appendChild(newLink);
 </div>
 <div id="footer" class="outer">
 	<div class="inner">
-				<a href="https://brainwallet.io/changelog.txt" target="_blank">Version History (v2.0.2)</a>
+				<a href="https://brainwallet.io/changelog.txt" target="_blank">Version History (v2.1.0)</a>
 				<a href="https://github.com/routman/brainwallet.io" target="_blank">GitHub</a>
 				<p>brainwallet.io &copy 2015-2018</p>
 		</div>
