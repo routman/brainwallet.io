@@ -7,48 +7,52 @@ Deterministic Bitcoin and Litecoin Address Generator
 
 Version History:
 
+v2.1.1 - 2017.07.19
+SHA256: 010B85B03F99E50796A60E35DE075EC614740B1BE7F7139F944C40548437E2B9
+• Additional printing options
+
 v2.1.0 - 2017.07.10
 SHA256: CF795396DBC0E9715E4F987BB94B5DB54179FFCB8CCB2F309A4AEE1DA4A5DA9B
-- - Paper wallet printing options
+• Paper wallet printing options
 
 v2.0.2 - 2017.07.07
 SHA256: F496722338E54521D9666ED1DBCEC75B110005C04750ABA8C92ECE723F2C9E79
-- - Typo
+• Typo
 
 v2.0.1 - 2017.07.05
 SHA256: 80FB8FBDC6583E1645569A687020374437E3629EDF2B6889140480DEEBF187AF
-- - Minor UI fixes
+• Minor UI fixes
 
 v2.0.0 - 2018.07.05
 SHA256: C3DED4116225E092351F9A9A894263134B933D760B87ACCA3DDE1ED0593625AD
-- - Updated user interface.  All key generation functionality remains exactly the same.
-- - Added support for Litecoin.
+• Updated user interface.  All key generation functionality remains exactly the same.
+• Added support for Litecoin.
 
 v1.1.0 - 2016-08-06
 SHA256: 4CE0A23BA327E3C2D858D0B91E2908A839CC02D16A8D57A8457E04F09D44F372
-- - Corrected file hashing functionality.  Previous version produced non-standard SHA256 checksums with some file formats.
-- - File drag-and-drop optimization
-- - Minor revisions to text in about section
+• Corrected file hashing functionality.  Previous version produced non-standard SHA256 checksums with some file formats.
+• File drag-and-drop optimization
+• Minor revisions to text in about section
 
 v1.0.1 - 2016-03-17
 SHA256: 76E2115953497A71CDD72CA82A4B91B9207201F49FB528521478DC711D2C8693
-- - Minor revisions to text in about section
+• Minor revisions to text in about section
 
 v1.0.0 - 2015-08-30
 SHA256: 5CB7383EEDF7C3D0A22C0F31EC442DE2D2FC538BC3473FA9BCB3CD1355B9159D
-- - Initial release of self contained HTML document
+• Initial release of self contained HTML document
 
 
 
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iQEzBAEBCgAdFiEE6267Cmwbdi+ygqOK3l99shsLPMoFAltE5vcACgkQ3l99shsL
-PMpRsgf+Kg4gqYmof816P8nxLllCvxyk2fgCFvvlZhj4M3L8AbX/2L3fwV8ZRfIy
-nW7p3BRvokoj0DNEPJ6K+0nMPbLrH4ZyH3RfeGQ+uSHyLTvvSS4Q31buCA1JF+vJ
-xEi1EayW19WjtdfpHMI4P5zL7c+hxDgQ2OpYvXzRdFJkKVtXQ5tcAoDXvdzQS2vj
-Xfb3GSKjo6fNWeCH696cGpBpcJZXfQHLY9QG+uubEvAFDzSvLHG96kLMoDIWeekL
-YHNEveJ+iH1cKGsO40BaXEVYD389Ny24LooaP0iASoU/g2346RCptWzrDn3IC2I6
-rbezZFlwSxfI3Nz9JHwWzkF+aRQwLA==
-=tEQ5
+iQEzBAEBCgAdFiEE6267Cmwbdi+ygqOK3l99shsLPMoFAltQ8roACgkQ3l99shsL
+PMo9tgf7BtosqtjJvq7uA5MSEXnCveQuLhA+dsnDN+LENnQfixB2euZxTfsY0pjW
+FvsHM6kIVGDLWr6Q/QcAYnjv6cG83QnIoUBpxOe1C0IiklHUsI3aXRcgTTmg6JQ2
+yqyARxPG10RsgB87SjulaWq4GMC8FmBCH8X+oGx+UMcmEurrJwUSE81pHhPJ6LoY
+JUHrhLWajnLxQ2qtFMqqY7JaJb3QdqxyhtrkanNhe2Ukyqz3GaXhCK65tqhme4Tw
+eH2rPa7AKmZMSN3lpQPr866EwiIG9oLZWTueb8VpIkaMeXIXEvmYvlecY/ZYixhO
+0uL61HiHbC57nN6iGs9Yfl1r/eWAnw==
+=Pgao
 -----END PGP SIGNATURE-----

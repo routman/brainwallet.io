@@ -2,7 +2,7 @@
 <html>
 <head>
 	<!--
-	brainwallet.io v2.1.0
+	brainwallet.io v2.1.1
 	Bitcoin Donation Address: 1G65KRrVxRw4FM8bHuiBia2CqChTeEHWuS
 	Litecoin Donation Address: LYPwR2yRumYUYGgJkU7xhhy1FWCmUzeS33
 
@@ -1634,11 +1634,7 @@ docHead.appendChild(newLink);
         });
 
 		//clear results when input is changed
-		$('.modebutton').click(function() {
-			$('#result').hide();
-			$('#progressbar').width('0%');
-		});
-		$('.currencybutton').click(function() {
+		$('.modebutton, .currencybutton, #random').click(function() {
 			$('#result').hide();
 			$('#progressbar').width('0%');
 		});
@@ -1700,10 +1696,18 @@ docHead.appendChild(newLink);
 
 		$('#hidepass').click(function() {
 			if (this.checked) {
-				$('th, td').hide();
+				$('.passhide').hide();
 			}
 			else {
-				$('th, td').show();
+				$('.passhide').show();
+			}
+		});
+		$('#hidesalt').click(function() {
+			if (this.checked) {
+				$('.salthide').hide();
+			}
+			else {
+				$('.salthide').show();
 			}
 		});
 
@@ -1799,23 +1803,23 @@ docHead.appendChild(newLink);
 					<th>Currency:</th>
 					<td class="presult" id="p-currency">BTC</td>
 				</tr>
-				<tr>
+				<tr class="passhide">
 					<th>Passphrase:</th>
 					<td class="presult" id="p-passphrase"></td>
 				</tr>
-				<tr>
+				<tr class="salthide">
 					<th id="p-label1"></th>
 					<td class="presult" id="p-salt1"></td>
 				</tr>
-				<tr>
+				<tr class="salthide">
 					<th id="p-label2"></th>
 					<td class="presult" id="p-salt2"></td>
 				</tr>
-				<tr>
+				<tr class="salthide">
 					<th id="p-label3"></th>
 					<td class="presult" id="p-salt3"></td>
 				</tr>
-				<tr>
+				<tr class="salthide">
 					<th id="p-label4"></th>
 					<td class="presult" id="p-salt4"></td>
 				</tr>
@@ -1830,7 +1834,8 @@ docHead.appendChild(newLink);
 
 			<div id="poptions">
 				<p class="pheader">Printing Options</p>
-				<input type="checkbox" class="cb" id="hidepass"/><p class="cblabel">Hide Passphrase & Salts</p><br>
+				<input type="checkbox" class="cb" id="hidepass"/><p class="cblabel">Hide Passphrase</p><br>
+				<input type="checkbox" class="cb" id="hidesalt"/><p class="cblabel">Hide Salts</p><br>
 				<input type="checkbox" class="cb" id="hidepriv"/><p class="cblabel">Hide Private Key</p>
 				<a id="print" href="javascript:window.print()">
 					<div class="formsubmit">print</div>
@@ -1900,7 +1905,7 @@ docHead.appendChild(newLink);
 </div>
 <div id="footer" class="outer">
 	<div class="inner">
-				<a href="https://brainwallet.io/changelog.txt" target="_blank">Version History (v2.1.0)</a>
+				<a href="https://brainwallet.io/changelog.txt" target="_blank">Version History (v2.1.1)</a>
 				<a href="https://github.com/routman/brainwallet.io" target="_blank">GitHub</a>
 				<p>brainwallet.io &copy 2015-2018</p>
 		</div>
