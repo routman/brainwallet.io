@@ -57,15 +57,14 @@
 	<style>
 
 html, body {
-	background: #f2f2f2;
+	background: #696d66;
 	margin: 0;
 	height: auto;
-
 	font-family: Helvetica;
-	font-weight: 200;
 	letter-spacing: 2px;
 	text-transform: uppercase;
-	color: #888888;
+	color: #444444;
+	font-size: 16px;
 }
 
 .green {
@@ -84,17 +83,17 @@ html, body {
 }
 
 #header {
-	height: 48px;
+	height: 60px;
 	background: #FFFFFF;
-	font-size: 16px;
-	line-height: 48px;
+	font-size: 18px;
+	line-height: 60px;
 }
 #header a {
   	text-decoration: none;
-  	color: #505050;
+  	color: #696d65;
 }
 #header a:visited {
-  	color: #505050;
+  	color: #696d65;
 }
 
 #title {
@@ -111,16 +110,15 @@ html, body {
 	cursor: pointer;
 }
 
-#content {
-	margin-bottom: 24px;
-	margin-top: 12px;
+#main {
+	background: #f2f2f2;
+	padding-bottom: 48px;
 }
 
 .label {
-	font-size: 14px;
 	clear: both;
 	float: left;
-	margin: 24px 0 4px 0;
+	margin: 32px 0 8px 0;
 }
 
 .infoheader {
@@ -132,7 +130,7 @@ html, body {
 textarea, input {
 	font-family: Helvetica, sans-serif;
 	border-radius: 3px;
-	color: #808080;
+	color: #444444;
 	background: #FFFFFF;
 	border: none;
 	box-sizing: border-box;
@@ -149,7 +147,6 @@ textarea:focus, input:focus{
 	padding: 12px;
 	font-size: 16px;
 }
-
 
 .fd-zone {
 	position: relative;
@@ -174,26 +171,23 @@ textarea:focus, input:focus{
 .action {
 	display: inline-block;
 	float: right;
-	margin: 24px 0 4px 24px;
+	margin: 32px 0 8px 24px;
 	cursor: pointer;
-	font-size: 14px;
 }
 .action:hover {
 	color: #80e600;
 }
 
-
 .formsubmit {
-	width: 128px;
+	width: 160px;
 	background: #FFFFFF;
-	color: #888888;
-	font-size: 14px;
+	color: #444444;
+	font-size: 16px;
 	padding: 0;
-	line-height: 40px;
+	line-height: 48px;
 	cursor: pointer;
 	-webkit-appearance: none;
 	border-radius: 3px;
-	font-weight: 200;
 }
 .formsubmit:hover {
 	color: #80e600;
@@ -227,8 +221,7 @@ textarea:focus, input:focus{
 }
 .currencybutton {
 	width: 50%;
-	line-height: 40px;
-	font-size: 14px;
+	line-height: 48px;
 	float: left;
 	background: none;
 	cursor: pointer;
@@ -255,8 +248,7 @@ textarea:focus, input:focus{
 
 .modebutton {
 	width: 33.3333%;
-	line-height: 40px;
-	font-size: 14px;
+	line-height: 48px;
 	float: left;
 	background: none;
 	cursor: pointer;
@@ -268,12 +260,13 @@ textarea:focus, input:focus{
 
 .active {
 	color: #80e600;
+	background: #696d65;
 }
 
 .saltinput {
 	display: block;
 	width: 100%;
-	height: 40px;
+	height: 48px;
 	margin: 0;
 	padding: 8px 12px;
 	font-size: 16px;
@@ -311,19 +304,17 @@ textarea:focus, input:focus{
 }
 
 #addr {
-  	margin: 8px 0;
-  	font-size: 18px;
+  margin: 8px 0 12px 0;
+  font-size: 18px;
 	letter-spacing: 0px;
-	color: #666666;
 	text-transform: none;
 }
 
 #private {
-	margin: 8px 0;
-	font-size: 16px;
+	margin: 8px 0 12px 0;
 	letter-spacing: 0px;
-	color: #666666;
 	text-transform: none;
+	font-size: 14px;
 }
 
 #printtitle {
@@ -341,7 +332,6 @@ th {
 	padding: 8px 0;
 	text-align: left;
 	vertical-align: top;
-	font-weight: 200;
 	letter-spacing: 2px;
 }
 
@@ -361,14 +351,17 @@ td {
 }
 
 .cb {
-	margin: 0;
-	width: 16px;
+	margin: 12px 0;
+	min-width: 24px;
+	min-height: 24px;
 }
 
 .cblabel {
 	font-size: 14px;
-	margin: 4px;
+	margin: 8px;
 	display: inline-block;
+	position: relative;
+	top: -7px;
 }
 
 #print {
@@ -386,46 +379,45 @@ td {
 	width: 100%;
 	text-transform: none;
 	letter-spacing: 0px;
+	font-size: 18px;
+	padding-bottom: 48px;
 }
 
 #footer {
-	font-size: 13px;
-	padding: 8px 0;
+	font-size: 14px;
+	padding: 24px 0 48px 0;
 }
 
 #footer a {
 	text-decoration: none;
-	margin-right: 32px;
-	color: #888888;
+	margin: 0 32px 28px 0;
+	display: inline-block;
+	color: #f2f2f2;
 }
 #footer p {
 	display: inline-block;
+	margin: 0 32px 12px 0;
+	color: #f2f2f2;
 }
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 824px) {
 	.outer {width: 100%;}
 	.inner {padding: 0 12px;}
-	#private {font-size: 14px;}
 }
 
-@media screen and (max-width: 480px) {
-	.outer {width: 100%;}
-	.inner {padding: 0 12px;}
-	#private {font-size: 12px;}
-	#about {font-size: 14px;}
+@media screen and (max-width: 444px) {
 	#mode {width: 100%;}
 	#currency {width: 100%;}
-}
-
-@media screen and (max-width: 400px) {
 	#addr {font-size: 16px;}
-	#private {font-size: 10px;}
+	#private {font-size: 12px;}
+	#random {display: none;}
+	.modebutton {font-size: 14px};
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 384px) {
 	#addr {font-size: 14px;}
-	#private {font-size: 9px;}
+	#private {font-size: 10px;}
 	.modebutton {font-size: 13px;}
 }
 
@@ -1684,13 +1676,13 @@ docHead.appendChild(newLink);
 
 		$('#info').click(function() {
 			$('#about').toggle();
-			$('#content').toggle();
+			$('#main').toggle();
 
 			if ($('#about').is(':visible')) {
 				$('#info').html('back');
 			}
 			else {
-				$('#info').html('info');
+				$('#info').html('about');
 			}
 		});
 
@@ -1736,110 +1728,112 @@ docHead.appendChild(newLink);
 				<a href="https://brainwallet.io">brainwallet</a><a class="green" href="https://brainwallet.io">.io</a>
 	  		</div>
 			<div id="info">
-				info
+				about
 			</div>
 		</div>
   	</div>
 </div>
-<div id="content" class="outer">
-	<div class="inner">
-		<form id="passform">
+<div id="main">
+	<div id="content" class="outer">
+		<div class="inner">
+			<form id="passform">
 
-			<p class="label">Currency</p>
-			<div id="currency">
-				<div id="btc" class="currencybutton active">btc</div>
-				<div id="ltc" class="currencybutton">ltc</div>
-			</div>
+				<p class="label">Currency</p>
+				<div id="currency">
+					<div id="btc" class="currencybutton active">btc</div>
+					<div id="ltc" class="currencybutton">ltc</div>
+				</div>
 
-			<p class="label">Passphrase</p>
-			<div id="random" class="action">random</div>
-			<div id="filebutton" class="action">
-				select file
-				<input type="file" id="file" name="file"/>
-			</div>
-			<textarea id="passphrase" class=".fd-zone" type="text" placeholder=""></textarea>
+				<p class="label">Passphrase</p>
+				<div id="random" class="action">random</div>
+				<div id="filebutton" class="action">
+					select file
+					<input type="file" id="file" name="file"/>
+				</div>
+				<textarea id="passphrase" class=".fd-zone" type="text" placeholder=""></textarea>
 
-			<p class="label">Salt Type</p>
-			<div id="mode">
-				<div id="login" class="modebutton active" >login</div>
-				<div id="personal" class="modebutton">personal</div>
-				<div id="generic" class="modebutton">generic</div>
-			</div>
+				<p class="label">Salt Type</p>
+				<div id="mode">
+					<div id="login" class="modebutton active" >login</div>
+					<div id="personal" class="modebutton">personal</div>
+					<div id="generic" class="modebutton">generic</div>
+				</div>
 
-			<div id="loginsalt">
-				<p class="label">Username</p>
-				<input id="loginsalt1" class="saltinput" type="text" placeholder="">
-				<p class="label">Password</p>
-				<input id="loginsalt2" class="saltinput" type="text" placeholder="">
-				<p class="label">4-6 Digit PIN</p>
-				<input id="loginsalt3" class="saltinput" type="text" placeholder="">
-			</div>
+				<div id="loginsalt">
+					<p class="label">Username</p>
+					<input id="loginsalt1" class="saltinput" type="text" placeholder="">
+					<p class="label">Password</p>
+					<input id="loginsalt2" class="saltinput" type="text" placeholder="">
+					<p class="label">4-6 Digit PIN</p>
+					<input id="loginsalt3" class="saltinput" type="text" placeholder="">
+				</div>
 
-			<div id="personalsalt">
-				<p class="label">Name</p>
-				<input id="personalsalt1" class="saltinput" type="text" placeholder="">
-				<p class="label">Email</p>
-				<input id="personalsalt2" class="saltinput" type="text" placeholder="">
-				<p class="label">Phone</p>
-				<input id="personalsalt3" class="saltinput" type="text" placeholder="">
-				<p class="label">Date of Birth</p>
-				<input id="personalsalt4" class="saltinput" type="text" placeholder="">
-			</div>
+				<div id="personalsalt">
+					<p class="label">Name</p>
+					<input id="personalsalt1" class="saltinput" type="text" placeholder="">
+					<p class="label">Email</p>
+					<input id="personalsalt2" class="saltinput" type="text" placeholder="">
+					<p class="label">Phone</p>
+					<input id="personalsalt3" class="saltinput" type="text" placeholder="">
+					<p class="label">Date of Birth</p>
+					<input id="personalsalt4" class="saltinput" type="text" placeholder="">
+				</div>
 
-			<div id="genericsalt">
-				<p class="label">SALT</p>
-				<input id="genericsalt1" class="saltinput" type="text" placeholder="">
-			</div>
+				<div id="genericsalt">
+					<p class="label">SALT</p>
+					<input id="genericsalt1" class="saltinput" type="text" placeholder="">
+				</div>
 
-			<input id="submit" class="formsubmit" type="submit" value="generate">
+				<input id="submit" class="formsubmit" type="submit" value="generate">
 
-		</form>
-		<div id="progressbar"></div>
-		<div id="result">
+			</form>
+			<div id="progressbar"></div>
+			<div id="result">
 
-			<p id="printtitle">BRAINWALLET.IO</p>
-			<table id="printtable">
-				<tr>
-					<th>Currency:</th>
-					<td class="presult" id="p-currency">BTC</td>
-				</tr>
-				<tr class="passhide">
-					<th>Passphrase:</th>
-					<td class="presult" id="p-passphrase"></td>
-				</tr>
-				<tr class="salthide">
-					<th id="p-label1"></th>
-					<td class="presult" id="p-salt1"></td>
-				</tr>
-				<tr class="salthide">
-					<th id="p-label2"></th>
-					<td class="presult" id="p-salt2"></td>
-				</tr>
-				<tr class="salthide">
-					<th id="p-label3"></th>
-					<td class="presult" id="p-salt3"></td>
-				</tr>
-				<tr class="salthide">
-					<th id="p-label4"></th>
-					<td class="presult" id="p-salt4"></td>
-				</tr>
-			</table>
+				<p id="printtitle">BRAINWALLET.IO</p>
+				<table id="printtable">
+					<tr>
+						<th>Currency:</th>
+						<td class="presult" id="p-currency">BTC</td>
+					</tr>
+					<tr class="passhide">
+						<th>Passphrase:</th>
+						<td class="presult" id="p-passphrase"></td>
+					</tr>
+					<tr class="salthide">
+						<th id="p-label1"></th>
+						<td class="presult" id="p-salt1"></td>
+					</tr>
+					<tr class="salthide">
+						<th id="p-label2"></th>
+						<td class="presult" id="p-salt2"></td>
+					</tr>
+					<tr class="salthide">
+						<th id="p-label3"></th>
+						<td class="presult" id="p-salt3"></td>
+					</tr>
+					<tr class="salthide">
+						<th id="p-label4"></th>
+						<td class="presult" id="p-salt4"></td>
+					</tr>
+				</table>
 
-			<p class="resultlabel">Public Address (SHARE):</p>
-			<p id="addr"></p>
-			<div id="addrQR"></div>
-			<p class="resultlabel" id="privatelabel">Private Key (SECRET):</p>
-			<p id="private"></p>
-			<div id="privateQR"></div>
+				<p class="resultlabel">Public Address (SHARE):</p>
+				<p id="addr"></p>
+				<div id="addrQR"></div>
+				<p class="resultlabel" id="privatelabel">Private Key (SECRET):</p>
+				<p id="private"></p>
+				<div id="privateQR"></div>
 
-			<div id="poptions">
-				<p class="pheader">Printing Options</p>
-				<input type="checkbox" class="cb" id="hidepass"/><p class="cblabel">Hide Passphrase</p><br>
-				<input type="checkbox" class="cb" id="hidesalt"/><p class="cblabel">Hide Salts</p><br>
-				<input type="checkbox" class="cb" id="hidepriv"/><p class="cblabel">Hide Private Key</p>
-				<a id="print" href="javascript:window.print()">
-					<div class="formsubmit">print</div>
-				</a>
+				<div id="poptions">
+					<p class="pheader">Printing Options</p>
+					<input type="checkbox" class="cb" id="hidepass"/><p class="cblabel">Hide Passphrase</p><br>
+					<input type="checkbox" class="cb" id="hidesalt"/><p class="cblabel">Hide Salts</p><br>
+					<input type="checkbox" class="cb" id="hidepriv"/><p class="cblabel">Hide Private Key</p>
+					<a id="print" href="javascript:window.print()">
+						<div class="formsubmit">print</div>
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -1859,8 +1853,6 @@ docHead.appendChild(newLink);
 				Your <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)" target="_blank">salts</a> are used as additional inputs to the cryptographic function that generates your brainwallet. This information never gets sent or stored anywhere, and is only used to strengthen your passphrase. You are required to enter at least one salt, and you have the ability to choose between different types of salts. There is no recovery process, so don't forget what you enter.<br>
 				<br>
 				Instead of typing a passphrase, you can use any file as your passphrase by selecting a file, or by dragging the file to the passphrase field.  Your browser performs an SHA256 hash operation on the file to derive a checksum, which is used as your passphrase. The file hashing takes place in your browser, and the file is never uploaded. It's important to never use a file that exists on the internet, and to keep it stored securely.  We recommend using a photograph that you have taken.<br>
-				<br>
-				<b>Note: </b>If you have difficulty recovering your brainwallet using the file hashing functionality, please try <a href="https://brainwallet.io/brainwallet.io.v1.0.1.html">this</a> older version, which generated non-standard checksums with some file formats.  This has been corrected in the current version.<br>
 				<br>
 				Brainwallet.io uses the <a href="https://en.wikipedia.org/wiki/Scrypt" target="_blank">scrypt</a> key derivation function to generate cryptocurrency keys.  Your salt inputs are concatenated and used as the salt for the scrypt function.<br>
 				<br>
@@ -1895,8 +1887,8 @@ docHead.appendChild(newLink);
 				EB6E BB0A 6C1B 762F B282<br>
 				A38A DE5F 7DB2 1B0B 3CCA<br>
 				<br>
-				Donate BTC: 1G65KRrVxRw4FM8bHuiBia2CqChTeEHWuS<br>
-				Donate LTC: LYPwR2yRumYUYGgJkU7xhhy1FWCmUzeS33<br>
+				BTC: 1G65KRrVxRw4FM8bHuiBia2CqChTeEHWuS<br>
+				LTC: LYPwR2yRumYUYGgJkU7xhhy1FWCmUzeS33<br>
 				<br>
 				Brainwallet.io is licensed under The MIT License (MIT)
 			</p>
@@ -1905,9 +1897,9 @@ docHead.appendChild(newLink);
 </div>
 <div id="footer" class="outer">
 	<div class="inner">
-				<a href="https://brainwallet.io/changelog.txt" target="_blank">Version History (v2.1.1)</a>
-				<a href="https://github.com/routman/brainwallet.io" target="_blank">GitHub</a>
-				<p>brainwallet.io &copy 2015-2018</p>
+				<a href="https://brainwallet.io/changelog.txt" target="_blank">Version History (v2.2.0)</a>
+				<a href="https://github.com/routman/brainwallet.io" target="_blank">GitHub Repository</a>
+				<p>brainwallet.io &copy 2015-<script>document.write(new Date().getFullYear())</script></p>
 		</div>
 	</div>
 </div>
