@@ -2,9 +2,9 @@
 <html>
 <head>
 	<!--
-	brainwallet.io v2.1.1
-	Bitcoin Donation Address: 1G65KRrVxRw4FM8bHuiBia2CqChTeEHWuS
-	Litecoin Donation Address: LYPwR2yRumYUYGgJkU7xhhy1FWCmUzeS33
+	brainwallet.io v2.3.0
+	Bitcoin Donation Address: bc1q7fqwmtq2vaka8wwpjpnmlehe36qrgfmlw33vh9
+	Litecoin Donation Address: LYMSJ313xJaUsAmucuYRkVJmGB8Ut9VDz8
 
 	Notice of Copyrights and Licenses:
 	***********************************
@@ -57,7 +57,6 @@
 	<style>
 
 html, body {
-	background: #696d66;
 	margin: 0;
 	height: auto;
 	font-family: Helvetica;
@@ -72,7 +71,7 @@ html, body {
 }
 
 .outer {
-	width: 800px;
+	width: 1000px;
 	margin: 0 auto;
 	overflow: auto;
 }
@@ -83,10 +82,7 @@ html, body {
 }
 
 #header {
-	height: 60px;
-	background: #FFFFFF;
-	font-size: 18px;
-	line-height: 60px;
+  padding: 24px 0;
 }
 #header a {
   	text-decoration: none;
@@ -98,12 +94,19 @@ html, body {
 
 #title {
 	display: inline-block;
+  font-size: 20px;
+}
+
+#subtitle {
+  font-size: 15px;
+  margin-top: 12px;
 }
 
 #info {
 	color: #505050;
 	display: inline-block;
 	float: right;
+  font-size: 20px;
 }
 #info:hover {
 	color: #80e600;
@@ -118,7 +121,7 @@ html, body {
 .label {
 	clear: both;
 	float: left;
-	margin: 32px 0 8px 0;
+	margin: 40px 0 8px 0;
 }
 
 .infoheader {
@@ -239,7 +242,7 @@ textarea:focus, input:focus{
 	border-radius: 3px;
 }
 
-#personal, #generic, #ltc {
+#login,#personal, #ltc {
 	border-left: 1px solid #EFEFEF;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -272,12 +275,12 @@ textarea:focus, input:focus{
 	font-size: 16px;
 }
 
-#personalsalt, #genericsalt {
+#personalsalt, #loginsalt {
 	display: none;
 }
 
 #submit {
-	margin-top: 40px;
+	margin-top: 60px;
 	border: none;
 	text-transform: uppercase;
 	letter-spacing: 2px;
@@ -289,6 +292,7 @@ textarea:focus, input:focus{
 #progressbar {
 	height: 12px;
 	margin-top: 24px;
+  margin-bottom: 48px;
 	background: #80e600;
 	width: 0%;
 	border-radius: 3px;
@@ -384,7 +388,6 @@ td {
 }
 
 #footer {
-	font-size: 14px;
 	padding: 24px 0 48px 0;
 }
 
@@ -392,18 +395,18 @@ td {
 	text-decoration: none;
 	margin: 0 32px 28px 0;
 	display: inline-block;
-	color: #f2f2f2;
+	color: #444444;
 }
 #footer p {
 	display: inline-block;
 	margin: 0 32px 12px 0;
-	color: #f2f2f2;
+	color: #444444;
 }
 
 
-@media screen and (max-width: 824px) {
+@media screen and (max-width: 1032px) {
 	.outer {width: 100%;}
-	.inner {padding: 0 12px;}
+	.inner {padding: 0 16px;}
 }
 
 @media screen and (max-width: 444px) {
@@ -412,7 +415,8 @@ td {
 	#addr {font-size: 16px;}
 	#private {font-size: 12px;}
 	#random {display: none;}
-	.modebutton {font-size: 14px};
+	.modebutton {font-size: 14px;}
+  #subtitle {font-size: 13px;}
 }
 
 @media screen and (max-width: 384px) {
@@ -1366,7 +1370,7 @@ docHead.appendChild(newLink);
 	var gen_compressed = false;
 
 	var currency = 'btc';
-	var mode = 0;
+	var mode = 2; //generic
 	var busy = 0;
 	var passphrase;
 	var salts = [];
@@ -1498,48 +1502,48 @@ docHead.appendChild(newLink);
 	            passphrase = $('#passphrase').val();
 				$('#p-passphrase').html(passphrase.replace(/\n/g, '<br />'));
 
-	            if (mode == 0) { //login salts
-					salts[0] = $('#loginsalt1').val();
-					salts[1] = $('#loginsalt2').val();
-					salts[2] = $('#loginsalt3').val();
-					salts[3] = "";
+	        if (mode == 0) { //login salts
+            salts[0] = $('#loginsalt1').val();
+            salts[1] = $('#loginsalt2').val();
+            salts[2] = $('#loginsalt3').val();
+            salts[3] = "";
 
-					$('#p-label1').html('Username:');
-					$('#p-label2').html('Password:');
-					$('#p-label3').html('4-6 Digit PIN:');
-					$('#p-label4').html('');
-	            }
+            $('#p-label1').html('Username:');
+            $('#p-label2').html('Password:');
+            $('#p-label3').html('4-6 Digit PIN:');
+            $('#p-label4').html('');
+	        }
 
-	            if (mode == 1) { //personal salts
-	              	salts[0] = $('#personalsalt1').val();
-	              	salts[1] = $('#personalsalt2').val();
-	              	salts[2] = $('#personalsalt3').val();
-	              	salts[3] = $('#personalsalt4').val();
+          if (mode == 1) { //personal salts
+              salts[0] = $('#personalsalt1').val();
+              salts[1] = $('#personalsalt2').val();
+              salts[2] = $('#personalsalt3').val();
+              salts[3] = $('#personalsalt4').val();
 
-					$('#p-label1').html('Name:');
-					$('#p-label2').html('Email:');
-					$('#p-label3').html('Phone:');
-					$('#p-label4').html('Date of Birth:');
-	            }
+              $('#p-label1').html('Name:');
+              $('#p-label2').html('Email:');
+              $('#p-label3').html('Phone:');
+              $('#p-label4').html('Date of Birth:');
+	          }
 
-	            if (mode == 2) { //generic salt
-	              	salts[0] = $('#genericsalt1').val();
-	              	salts[1] = "";
-	              	salts[2] = "";
-	              	salts[3] = "";
+	          if (mode == 2) { //generic salt
+              salts[0] = $('#genericsalt1').val();
+              salts[1] = "";
+              salts[2] = "";
+              salts[3] = "";
 
-					$('#p-label1').html('Salt:');
-					$('#p-label2').html('');
-					$('#p-label3').html('');
-					$('#p-label4').html('');
-	            }
+              $('#p-label1').html('Salt:');
+              $('#p-label2').html('');
+              $('#p-label3').html('');
+              $('#p-label4').html('');
+	          }
 
 	            salt = salts[0]+salts[1]+salts[2]+salts[3];
 
-				$('#p-salt1').html(salts[0]);
-				$('#p-salt2').html(salts[1]);
-				$('#p-salt3').html(salts[2]);
-				$('#p-salt4').html(salts[3]);
+              $('#p-salt1').html(salts[0]);
+              $('#p-salt2').html(salts[1]);
+              $('#p-salt3').html(salts[2]);
+              $('#p-salt4').html(salts[3]);
 
 	            if (!passphrase) {
 	              	alert("You must enter a passphrase");
@@ -1682,7 +1686,7 @@ docHead.appendChild(newLink);
 				$('#info').html('back');
 			}
 			else {
-				$('#info').html('about');
+				$('#info').html('info');
 			}
 		});
 
@@ -1724,14 +1728,11 @@ docHead.appendChild(newLink);
 <div id="header">
 	<div class="outer">
 		<div class="inner">
-	  		<div id="title">
-				<a href="https://brainwallet.io">brainwallet</a><a class="green" href="https://brainwallet.io">.io</a>
-	  		</div>
-			<div id="info">
-				about
-			</div>
+      <div id="title"><a href="https://brainwallet.io">brainwallet</a><a class="green" href="https://brainwallet.io">.io</a></div>
+      <div id="info">info</div>
+      <div id="subtitle">Cryptocurrency Address Generator</div>
 		</div>
-  	</div>
+  </div>
 </div>
 <div id="main">
 	<div id="content" class="outer">
@@ -1740,8 +1741,8 @@ docHead.appendChild(newLink);
 
 				<p class="label">Currency</p>
 				<div id="currency">
-					<div id="btc" class="currencybutton active">btc</div>
-					<div id="ltc" class="currencybutton">ltc</div>
+					<div id="btc" class="currencybutton active">Bitcoin</div>
+					<div id="ltc" class="currencybutton">Litecoin</div>
 				</div>
 
 				<p class="label">Passphrase</p>
@@ -1754,9 +1755,9 @@ docHead.appendChild(newLink);
 
 				<p class="label">Salt Type</p>
 				<div id="mode">
-					<div id="login" class="modebutton active" >login</div>
+          <div id="generic" class="modebutton active">generic</div>
+					<div id="login" class="modebutton" >login</div>
 					<div id="personal" class="modebutton">personal</div>
-					<div id="generic" class="modebutton">generic</div>
 				</div>
 
 				<div id="loginsalt">
@@ -1780,7 +1781,7 @@ docHead.appendChild(newLink);
 				</div>
 
 				<div id="genericsalt">
-					<p class="label">SALT</p>
+					<p class="label">SALT (Additional Password)</p>
 					<input id="genericsalt1" class="saltinput" type="text" placeholder="">
 				</div>
 
@@ -1846,7 +1847,7 @@ docHead.appendChild(newLink);
 			<p>
 				Brainwallet.io is a deterministic cryptocurrency address generator for Bitcoin and Litecoin that runs in your web browser.  It converts any text or file into a private key and public address, allowing you to store cryptocurrency on paper, in a password manager, within a photograph or document, or in your brain by memorizing the passphrase and salts.  Key generation takes place in your browser, and no information is ever sent to our server.<br>
 				<br>
-				<b>Disclaimer: </b>Use at your own risk. Brainwallets can be dangerous if you don't know what you are doing. You must use a strong passphrase and take security precautions to prevent loss or theft.  By using brainwallet.io, you are agreeing to our Terms of Service (below).<br>
+				<b>Disclaimer: </b>Use at your own risk. Brainwallets can be risky if you don't know what you are doing. You must use a strong passphrase and take security precautions to prevent loss or theft.  By using brainwallet.io, you are agreeing to our Terms of Service (below).<br>
 				<br>
 				Use a long, unique passphrase that is never used in any song, literature, or media. If you use a weak passphrase, you are at risk of having your money stolen. We recommend a minimum of 8 random words. Click the "random" button to have a secure 12-word passphrase generated for you. If you forget your passphrase, your cryptocurrency will be lost forever, so please write down your passphrase and salts.  <br>
 				<br>
@@ -1886,9 +1887,10 @@ docHead.appendChild(newLink);
 				<a href="https://brainwallet.io/pgpkey.asc" target="_blank">PGP key</a><br>
 				EB6E BB0A 6C1B 762F B282<br>
 				A38A DE5F 7DB2 1B0B 3CCA<br>
-				<br>
-				BTC: 1G65KRrVxRw4FM8bHuiBia2CqChTeEHWuS<br>
-				LTC: LYPwR2yRumYUYGgJkU7xhhy1FWCmUzeS33<br>
+        <br>
+        Donations are greatly appreciated!<br>
+				BTC: bc1q7fqwmtq2vaka8wwpjpnmlehe36qrgfmlw33vh9<br>
+				LTC: LYMSJ313xJaUsAmucuYRkVJmGB8Ut9VDz8<br>
 				<br>
 				Brainwallet.io is licensed under The MIT License (MIT)
 			</p>
@@ -1897,8 +1899,8 @@ docHead.appendChild(newLink);
 </div>
 <div id="footer" class="outer">
 	<div class="inner">
-				<a href="https://brainwallet.io/changelog.txt" target="_blank">Version History (v2.2.0)</a>
-				<a href="https://github.com/routman/brainwallet.io" target="_blank">GitHub Repository</a>
+        <a href="https://brainwallet.io/changelog.txt" target="_blank">Changelog</a>
+				<a href="https://github.com/routman/brainwallet.io" target="_blank">Source</a>
 				<p>brainwallet.io &copy 2015-<script>document.write(new Date().getFullYear())</script></p>
 		</div>
 	</div>
