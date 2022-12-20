@@ -36,15 +36,22 @@ Brainwallet.io is not responsible for any losses in cryptocurrency that you may 
 We reserve the right to modify or terminate the Service for any reason, without notice at any time. We reserve the right to alter these Terms at any time.
 
 CREATED BY
+
 Daniel Routman
+
 daniel@ncrypt.org
 
+
 PGP key
+
 EB6E BB0A 6C1B 762F B282
+
 A38A DE5F 7DB2 1B0B 3CCA
 
 Donations are greatly appreciated!
+
 BTC: bc1q7fqwmtq2vaka8wwpjpnmlehe36qrgfmlw33vh9
+
 LTC: LYMSJ313xJaUsAmucuYRkVJmGB8Ut9VDz8
 
 Brainwallet.io is licensed under The MIT License (MIT)
