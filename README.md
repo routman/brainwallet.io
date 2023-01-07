@@ -11,7 +11,8 @@ Your salts are used as additional inputs to the cryptographic function that gene
 
 Instead of typing a passphrase, you can use any file as your passphrase by selecting a file, or by dragging the file to the passphrase field. Your browser performs an SHA256 hash operation on the file to derive a checksum, which is used as your passphrase. The file hashing takes place in your browser, and the file is never uploaded. It's important to never use a file that exists on the internet, and to keep it stored securely. We recommend using a photograph that you have taken.
 
-
+Brainwallet.io is a self-contained website that can be run offline. We recommend that you download the latest HTML file from GitHub, verify file integrity (checksum) with the PGP-signed changelog, and run it on an offline computer. Keep a copy of the HTML file that you used to generate your brainwallet with for safekeeping.
+#
 Brainwallet.io uses the scrypt key derivation function to generate cryptocurrency keys. Your salt inputs are concatenated and used as the salt for the scrypt function.
 
 The process is as follows (pseudocode):
@@ -20,9 +21,7 @@ key = scrypt(passphrase, salt, N=218, r=8, p=1, dkLen=32)
 keypair = generate_keypair(sha256(key))
 
 Scrypt is a memory-intensive function that is deliberately slow to frustrate brute-force attacks. Performance may vary depending on your hardware, and in some cases may not work at all. If you run into problems, try a different web browser or a newer computer. We can't sacrifice security for legacy support.
-
-Brainwallet.io is a self-contained website that can be run offline. We recommend that you download the latest HTML file from GitHub, verify file integrity (checksum) with the PGP-signed changelog, and run it on an offline computer. Keep a copy of the HTML file that you used to generate your brainwallet with for safekeeping.
-
+#
 TERMS OF SERVICE
 
 These Terms of Service (“Terms”) govern your access to and use of brainwallet.io (“Service”), and any information, text, links, graphics, photos, videos, or other materials uploaded, downloaded or appearing on the Service (collectively referred to as “Content”). By using the Service you agree to be bound by these Terms.
@@ -34,20 +33,19 @@ In no event shall brainwallet.io be held liable for anything arising out of or i
 Brainwallet.io is not responsible for any losses in cryptocurrency that you may incur for any reason.
 
 We reserve the right to modify or terminate the Service for any reason, without notice at any time. We reserve the right to alter these Terms at any time.
-
+#
 CREATED BY
 
 Daniel Routman
 
 daniel@ncrypt.org
 
-
 PGP key
 
 EB6E BB0A 6C1B 762F B282
 
 A38A DE5F 7DB2 1B0B 3CCA
-
+#
 Donations are greatly appreciated!
 
 BTC: bc1q7fqwmtq2vaka8wwpjpnmlehe36qrgfmlw33vh9
