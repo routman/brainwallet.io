@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 	<!--
-	brainwallet.io v2.3.0
+	brainwallet.io v2.4.0
 	Bitcoin Donation Address: bc1q7fqwmtq2vaka8wwpjpnmlehe36qrgfmlw33vh9
 	Litecoin Donation Address: LYMSJ313xJaUsAmucuYRkVJmGB8Ut9VDz8
 
@@ -61,34 +61,21 @@
 
 	<style>
 
-html, body {
-	margin: 0;
+body {
+	margin: 20px;
 	height: auto;
 	font-family: Helvetica;
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	color: #444444;
 	font-size: 16px;
+  font-weight: 100;
 }
 
 .io {
-  color: #919191 !important;
+  color: #e6006e !important;
 }
 
-.outer {
-	width: 1000px;
-	margin: 0 auto;
-	overflow: auto;
-}
-
-.inner {
-	padding: 0;
-	overflow: auto;
-}
-
-#header {
-  padding: 24px 0;
-}
 #header a {
   	text-decoration: none;
   	color: #696d65;
@@ -99,12 +86,14 @@ html, body {
 
 #title {
 	display: inline-block;
-  font-size: 20px;
+  font-size: 22px;
+  line-height: 38px;
+  letter-spacing: 6px;
 }
 
 #subtitle {
   font-size: 15px;
-  margin-top: 12px;
+  margin-top: 8px;
 }
 
 #info {
@@ -112,15 +101,11 @@ html, body {
 	display: inline-block;
 	float: right;
   font-size: 20px;
+  line-height: 38px;
 }
 #info:hover {
-	color: #aae660;
+	color: #00d8ba;
 	cursor: pointer;
-}
-
-#main {
-	background: #f2f2f2;
-	padding-bottom: 48px;
 }
 
 .label {
@@ -137,22 +122,28 @@ html, body {
 
 textarea, input {
 	font-family: Helvetica, sans-serif;
-	border-radius: 3px;
 	color: #444444;
 	background: #FFFFFF;
-	border: none;
+	border: 1px solid #444444;
+  caret-color: #444444;
 	box-sizing: border-box;
+  padding: 10px;
+  box-shadow: 1px 1px 0px 0px #e69ec0;
 }
 
 textarea:focus, input:focus{
-    outline: none;
+  outline: none;
+  border: 2px solid #444444;
+  border-image: linear-gradient(to right, #00d8ba 0%, #e6006e 100%);
+  border-image-slice: 1;
+  box-shadow: 2px 2px 0px 0px #e69ec0;
 }
 
 #passphrase {
 	width: 100%;
 	max-width: 100%;
 	height: 120px;
-	padding: 12px;
+	padding: 10px;
 	font-size: 16px;
 }
 
@@ -162,7 +153,7 @@ textarea:focus, input:focus{
 }
 
 .fd-zone.over {
- 	border-color: maroon; background: #aae660;
+  background: #00d8ba;
 }
 
 .fd-file {
@@ -183,22 +174,22 @@ textarea:focus, input:focus{
 	cursor: pointer;
 }
 .action:hover {
-	color: #aae660;
+	color: #00d8ba;
 }
 
 .formsubmit {
 	width: 160px;
 	background: #FFFFFF;
 	color: #444444;
+  border: 1px solid #444444;
 	font-size: 16px;
 	padding: 0;
 	line-height: 48px;
 	cursor: pointer;
 	-webkit-appearance: none;
-	border-radius: 3px;
 }
 .formsubmit:hover {
-	color: #aae660;
+	color: #00d8ba;
 }
 
 #filebutton {
@@ -225,7 +216,7 @@ textarea:focus, input:focus{
 	width: 280px;
 	background: #FFFFFF;
 	clear: both;
-	border-radius: 3px;
+  border: 1px solid #444444;
 }
 .currencybutton {
 	width: 50%;
@@ -236,19 +227,18 @@ textarea:focus, input:focus{
 	text-align: center;
 }
 .currencybutton:hover {
-	color: #aae660;
+	color: #00d8ba;
 }
 
 #mode {
 	overflow: auto;
 	width: 420px;
-	background: #FFFFFF;
 	clear: both;
-	border-radius: 3px;
+  border: 1px solid #444444;
 }
 
 #login,#personal, #ltc {
-	border-left: 1px solid #EFEFEF;
+	border-left: 1px solid #444444;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
@@ -258,17 +248,16 @@ textarea:focus, input:focus{
 	width: 33.3333%;
 	line-height: 48px;
 	float: left;
-	background: none;
+	background: #;
 	cursor: pointer;
 	text-align: center;
 }
 .modebutton:hover {
-	color: #aae660;
+	color: #00d8ba;
 }
 
 .active {
-	color: #aae660;
-	background: #696d65;
+	color: #e6006e;
 }
 
 .saltinput {
@@ -286,21 +275,27 @@ textarea:focus, input:focus{
 
 #submit {
 	margin-top: 60px;
-	border: none;
+	border: 1px solid #444444;
 	text-transform: uppercase;
 	letter-spacing: 2px;
+  padding: 1px;
 }
 #submit:hover {
-	color: #aae660;
+	color: #00d8ba;
+}
+#submit:focus {
+  border-image: linear-gradient(to right, #00d8ba 0%, #e6006e 100%);
+  border-width: 2px;
+  border-image-slice: 1;
+  padding: 0px;
 }
 
 #progressbar {
-	height: 12px;
-	margin-top: 24px;
+	height: 4px;
+	margin-top: 50px;
   margin-bottom: 48px;
-	background: #aae660;
+	background: #e6006e;
 	width: 0%;
-	border-radius: 3px;
 }
 
 #result {
@@ -356,13 +351,13 @@ td {
 .pheader {
 	font-size: 16px;
 	clear: both;
-	margin: 48px 0 8px 0;
+	margin: 40px 0 8px 0;
 }
 
 .cb {
 	margin: 12px 0;
-	min-width: 24px;
-	min-height: 24px;
+	min-width: 20px;
+	min-height: 20px;
 }
 
 .cblabel {
@@ -376,15 +371,24 @@ td {
 #print {
 	display: block;
 	text-decoration: none;
-	color: #000000;
-	margin-top: 24px;
+	color: #444444;
+	margin: 10px 0 40px 0;
 	text-align: center;
-	overflow: auto;
+}
+
+#printbtn {
+  box-shadow: 1px 1px 0px 0px #e69ec0;
+  padding: 1px;
+}
+#printbtn:focus {
+  border-image: linear-gradient(to right, #00d8ba 0%, #e6006e 100%);
+  border-width: 2px;
+  border-image-slice: 1;
+  padding: 0px;
 }
 
 #about {
 	display: none;
-	background: #F2F2F2;
 	width: 100%;
 	text-transform: none;
 	letter-spacing: 0px;
@@ -393,25 +397,14 @@ td {
 }
 
 #footer {
-	padding: 24px 0 48px 0;
+  font-size: 18px;
+	margin-bottom: 20px;
+  text-transform: none;
 }
-
 #footer a {
-	text-decoration: none;
-	margin: 0 32px 28px 0;
+	margin: 0 32px 20px 0;
 	display: inline-block;
-	color: #444444;
-}
-#footer p {
-	display: inline-block;
-	margin: 0 32px 12px 0;
-	color: #444444;
-}
-
-
-@media screen and (max-width: 1032px) {
-	.outer {width: 100%;}
-	.inner {padding: 0 16px;}
+	color: #e6006e;
 }
 
 @media screen and (max-width: 444px) {
@@ -1566,10 +1559,13 @@ d[e>>>5]|=128<<24-e%32;d[(e+64>>>9<<4)+14]=h.floor(b/4294967296);d[(e+64>>>9<<4)
 			            },
 			            function(result) {
 			            	$('#progressbar').width('100%');
-				   			makeAddr(result);
-					      	$('#result').show();
-					      	busy = 0;
-							$("html, body").animate({ scrollTop: $(document).height() }, "slow");
+                    makeAddr(result);
+                    $('#result').show();
+                    busy = 0;
+                    //$("html, body").animate({ scrollTop: $(document).height() }, "slow");
+                    $([document.documentElement, document.body]).animate({
+                      scrollTop: $("#result").offset().top
+                    }, 500);
 			            },
 			        "hex");
 	            }
@@ -1730,184 +1726,174 @@ d[e>>>5]|=128<<24-e%32;d[(e+64>>>9<<4)+14]=h.floor(b/4294967296);d[(e+64>>>9<<4)
 <body>
 
 <div id="header">
-	<div class="outer">
-		<div class="inner">
-      <div id="title"><a href="https://brainwallet.io">brainwallet</a><a class="io" href="https://brainwallet.io">.io</a></div>
-      <div id="info">info</div>
-      <div id="subtitle">Cryptocurrency Address Generator</div>
-		</div>
-  </div>
+  <div id="title"><a href="https://brainwallet.io">brainwallet</a><a class="io" href="https://brainwallet.io">.io</a></div>
+  <div id="subtitle">Cryptocurrency Address Generator</div>
 </div>
 <div id="main">
-	<div id="content" class="outer">
-		<div class="inner">
-			<form id="passform">
+	<div id="content">
+    <form id="passform">
 
-				<p class="label">Currency</p>
-				<div id="currency">
-					<div id="btc" class="currencybutton active">Bitcoin</div>
-					<div id="ltc" class="currencybutton">Litecoin</div>
-				</div>
+      <p class="label">Currency</p>
+      <div id="currency">
+        <div id="btc" class="currencybutton active">Bitcoin</div>
+        <div id="ltc" class="currencybutton">Litecoin</div>
+      </div>
 
-        <label for="passphrase" class="label">Passphrase</label>
-				<div id="random" class="action">random</div>
-				<div id="filebutton" class="action">
-          <label for="file">Select File</label>
-					<input type="file" id="file" name="file"/>
-				</div>
-				<textarea id="passphrase" class=".fd-zone" type="text" placeholder=""></textarea>
+      <label for="passphrase" class="label">Passphrase</label>
+      <div id="random" class="action">random</div>
+      <div id="filebutton" class="action">
+        <label for="file">Select File</label>
+        <input type="file" id="file" name="file"/>
+      </div>
+      <textarea id="passphrase" class=".fd-zone" type="text" placeholder=""></textarea>
 
-				<p class="label">Salt Type</p>
-				<div id="mode">
-          <div id="generic" class="modebutton active">generic</div>
-					<div id="login" class="modebutton" >login</div>
-					<div id="personal" class="modebutton">personal</div>
-				</div>
+      <p class="label">Salt Type</p>
+      <div id="mode">
+        <div id="generic" class="modebutton active">generic</div>
+        <div id="login" class="modebutton" >login</div>
+        <div id="personal" class="modebutton">personal</div>
+      </div>
 
-				<div id="loginsalt">
-          <label for="loginsalt1" class="label">Username</label>
-					<input id="loginsalt1" class="saltinput" type="text" placeholder="">
-          <label for="loginsalt2" class="label">Password</label>
-					<input id="loginsalt2" class="saltinput" type="text" placeholder="">
-          <label for="loginsalt3" class="label">4-6 Digit PIN</label>
-					<input id="loginsalt3" class="saltinput" type="text" placeholder="">
-				</div>
+      <div id="loginsalt">
+        <label for="loginsalt1" class="label">Username</label>
+        <input id="loginsalt1" class="saltinput" type="text" placeholder="">
+        <label for="loginsalt2" class="label">Password</label>
+        <input id="loginsalt2" class="saltinput" type="text" placeholder="">
+        <label for="loginsalt3" class="label">4-6 Digit PIN</label>
+        <input id="loginsalt3" class="saltinput" type="text" placeholder="">
+      </div>
 
-				<div id="personalsalt">
-          <label for="personalsalt1" class="label">Name</label>
-					<input id="personalsalt1" class="saltinput" type="text" placeholder="">
-          <label for="personalsalt2" class="label">Email</label>
-					<input id="personalsalt2" class="saltinput" type="text" placeholder="">
-          <label for="personalsalt3" class="label">Phone</label>
-					<input id="personalsalt3" class="saltinput" type="text" placeholder="">
-          <label for="personalsalt4" class="label">Date of Birth</label>
-					<input id="personalsalt4" class="saltinput" type="text" placeholder="">
-				</div>
+      <div id="personalsalt">
+        <label for="personalsalt1" class="label">Name</label>
+        <input id="personalsalt1" class="saltinput" type="text" placeholder="">
+        <label for="personalsalt2" class="label">Email</label>
+        <input id="personalsalt2" class="saltinput" type="text" placeholder="">
+        <label for="personalsalt3" class="label">Phone</label>
+        <input id="personalsalt3" class="saltinput" type="text" placeholder="">
+        <label for="personalsalt4" class="label">Date of Birth</label>
+        <input id="personalsalt4" class="saltinput" type="text" placeholder="">
+      </div>
 
-				<div id="genericsalt">
-          <label for="genericsalt1" class="label">SALT (Additional Password)</label>
-					<input id="genericsalt1" class="saltinput" type="text" placeholder="">
-				</div>
+      <div id="genericsalt">
+        <label for="genericsalt1" class="label">SALT (Additional Password)</label>
+        <input id="genericsalt1" class="saltinput" type="text" placeholder="">
+      </div>
 
-				<input id="submit" class="formsubmit" type="submit" value="generate">
+      <input id="submit" class="formsubmit" type="submit" value="generate">
 
-			</form>
-			<div id="progressbar"></div>
-			<div id="result">
+    </form>
+    <div id="progressbar"></div>
+    <div id="result">
 
-				<p id="printtitle">BRAINWALLET.IO</p>
-				<table id="printtable">
-					<tr>
-						<th>Currency:</th>
-						<td class="presult" id="p-currency">BTC</td>
-					</tr>
-					<tr class="passhide">
-						<th>Passphrase:</th>
-						<td class="presult" id="p-passphrase"></td>
-					</tr>
-					<tr class="salthide">
-						<th id="p-label1"></th>
-						<td class="presult" id="p-salt1"></td>
-					</tr>
-					<tr class="salthide">
-						<th id="p-label2"></th>
-						<td class="presult" id="p-salt2"></td>
-					</tr>
-					<tr class="salthide">
-						<th id="p-label3"></th>
-						<td class="presult" id="p-salt3"></td>
-					</tr>
-					<tr class="salthide">
-						<th id="p-label4"></th>
-						<td class="presult" id="p-salt4"></td>
-					</tr>
-				</table>
+      <p id="printtitle">BRAINWALLET.IO</p>
+      <table id="printtable">
+        <tr>
+          <th>Currency:</th>
+          <td class="presult" id="p-currency">BTC</td>
+        </tr>
+        <tr class="passhide">
+          <th>Passphrase:</th>
+          <td class="presult" id="p-passphrase"></td>
+        </tr>
+        <tr class="salthide">
+          <th id="p-label1"></th>
+          <td class="presult" id="p-salt1"></td>
+        </tr>
+        <tr class="salthide">
+          <th id="p-label2"></th>
+          <td class="presult" id="p-salt2"></td>
+        </tr>
+        <tr class="salthide">
+          <th id="p-label3"></th>
+          <td class="presult" id="p-salt3"></td>
+        </tr>
+        <tr class="salthide">
+          <th id="p-label4"></th>
+          <td class="presult" id="p-salt4"></td>
+        </tr>
+      </table>
 
-				<p class="resultlabel">Public Address (SHARE):</p>
-				<p id="addr"></p>
-				<div id="addrQR"></div>
-				<p class="resultlabel" id="privatelabel">Private Key (SECRET):</p>
-				<p id="private"></p>
-				<div id="privateQR"></div>
+      <p class="resultlabel">Public Address (SHARE):</p>
+      <p id="addr"></p>
+      <div id="addrQR"></div>
+      <p class="resultlabel" id="privatelabel">Private Key (SECRET):</p>
+      <p id="private"></p>
+      <div id="privateQR"></div>
 
-				<div id="poptions">
-					<p class="pheader">Printing Options</p>
-					<input type="checkbox" class="cb" id="hidepass"/><label for="hidepass" class="cblabel">Hide Passphrase</label><br>
-					<input type="checkbox" class="cb" id="hidesalt"/><label for="hidesalt" class="cblabel">Hide Salts</label><br>
-					<input type="checkbox" class="cb" id="hidepriv"/><label for="hidepriv" class="cblabel">Hide Private Key</label><br>
-					<a id="print" href="javascript:window.print()">
-						<div class="formsubmit">print</div>
-					</a>
-				</div>
-			</div>
-		</div>
+      <div id="poptions">
+        <p class="pheader">Printing Options</p>
+        <input type="checkbox" class="cb" id="hidepass"/><label for="hidepass" class="cblabel">Hide Passphrase</label><br>
+        <input type="checkbox" class="cb" id="hidesalt"/><label for="hidesalt" class="cblabel">Hide Salts</label><br>
+        <input type="checkbox" class="cb" id="hidepriv"/><label for="hidepriv" class="cblabel">Hide Private Key</label><br>
+        <a id="print" href="javascript:window.print()">
+          <div id="printbtn" class="formsubmit">print</div>
+        </a>
+      </div>
+    </div>
 	</div>
 </div>
 
 <div id="about">
-	<div class="outer">
-		<div class="inner">
-			<p class="infoheader">About brainwallet.io</p>
-			<p>
-				Brainwallet.io is a deterministic cryptocurrency address generator for Bitcoin and Litecoin that runs in your web browser.  It converts any text or file into a private key and public address, allowing you to store cryptocurrency on paper, in a password manager, within a photograph or document, or in your brain by memorizing the passphrase and salts.  Key generation takes place in your browser, and no information is ever sent to our server.<br>
-				<br>
-				<b>Disclaimer: </b>Use at your own risk. Brainwallets can be risky if you don't know what you are doing. You must use a strong passphrase and take security precautions to prevent loss or theft.  By using brainwallet.io, you are agreeing to our Terms of Service (below).<br>
-				<br>
-				Use a long, unique passphrase that is never used in any song, literature, or media. If you use a weak passphrase, you are at risk of having your money stolen. We recommend a minimum of 8 random words. Click the "random" button to have a secure 12-word passphrase generated for you. If you forget your passphrase, your cryptocurrency will be lost forever, so please write down your passphrase and salts.  <br>
-				<br>
-				Your <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)" target="_blank">salts</a> are used as additional inputs to the cryptographic function that generates your brainwallet. This information never gets sent or stored anywhere, and is only used to strengthen your passphrase. You are required to enter at least one salt, and you have the ability to choose between different types of salts. There is no recovery process, so don't forget what you enter.<br>
-				<br>
-				Instead of typing a passphrase, you can use any file as your passphrase by selecting a file, or by dragging the file to the passphrase field.  Your browser performs an SHA256 hash operation on the file to derive a checksum, which is used as your passphrase. The file hashing takes place in your browser, and the file is never uploaded. It's important to never use a file that exists on the internet, and to keep it stored securely.  We recommend using a photograph that you have taken.<br>
-				<br>
-				Brainwallet.io uses the <a href="https://en.wikipedia.org/wiki/Scrypt" target="_blank">scrypt</a> key derivation function to generate cryptocurrency keys.  Your salt inputs are concatenated and used as the salt for the scrypt function.<br>
-				<br>
-				The process is as follows (pseudocode):<br>
-				<li>key = scrypt(passphrase, salt, N=2<sup>18</sup>, r=8, p=1, dkLen=32)</li>
-				<li>keypair = generate_keypair(sha256(key))</li>
-				<br>
-				Scrypt is a memory-intensive function that is deliberately slow to frustrate brute-force attacks.  Performance may vary depending on your hardware, and in some cases may not work at all.  If you run into problems, try a different web browser or a newer computer.  We can't sacrifice security for legacy support.<br>
-				<br>
-				Brainwallet.io is a self-contained website that can be run offline.  We recommend that you download the latest HTML file from GitHub, verify file integrity (checksum) with the PGP-signed changelog, and run it on an offline computer.  Keep a copy of the HTML file that you used to generate your brainwallet with for safekeeping.<br>
-				<br>
-			</p>
-			<p class="infoheader">Terms of Service</p>
-			<p>
-				These Terms of Service (“Terms”) govern your access to and use of brainwallet.io (“Service”), and any information, text, links, graphics, photos, videos, or other materials uploaded, downloaded or appearing on the Service (collectively referred to as “Content”). By using the Service you agree to be bound by these Terms.<br>
-				<br>
-				You are responsible for your use of this Service and for any Content you provide, including compliance with applicable laws, rules, and regulations. Your access to and use of the Service or any Content are at your own risk. You understand and agree that the Service is provided to you on an “AS IS” and “AS AVAILABLE” basis.<br>
-				<br>
-				In no event shall brainwallet.io be held liable for anything arising out of or in any way connected with your use of this Service whether such liability is under contract. Brainwallet.io shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this Service.<br>
-				<br>
-				Brainwallet.io is not responsible for any losses in cryptocurrency that you may incur for any reason.<br>
-				<br>
-				We reserve the right to modify or terminate the Service for any reason, without notice at any time. We reserve the right to alter these Terms at any time.<br>
-				<br>
-			</p>
-			<p class="infoheader">Created by</p>
-			<p>
-				Daniel Routman<br>
-				<a href="mailto:daniel@ncrypt.org">daniel@ncrypt.org</a><br>
-				<br>
-				<a href="https://brainwallet.io/pgpkey.asc" target="_blank">PGP key</a><br>
-				EB6E BB0A 6C1B 762F B282<br>
-				A38A DE5F 7DB2 1B0B 3CCA<br>
-        <br>
-        Donations are greatly appreciated!<br>
-				BTC: bc1q7fqwmtq2vaka8wwpjpnmlehe36qrgfmlw33vh9<br>
-				LTC: LYMSJ313xJaUsAmucuYRkVJmGB8Ut9VDz8<br>
-				<br>
-				Brainwallet.io is licensed under The MIT License (MIT)
-			</p>
-		</div>
-	</div>
+  <p class="infoheader">About brainwallet.io</p>
+  <p>
+    Brainwallet.io is a deterministic cryptocurrency address generator for Bitcoin and Litecoin that runs in your web browser.  It converts any text or file into a private key and public address, allowing you to store cryptocurrency on paper, in a password manager, within a photograph or document, or in your brain by memorizing the passphrase and salts.  Key generation takes place in your browser, and no information is ever sent to our server.<br>
+    <br>
+    <b>Disclaimer: </b>Use at your own risk. Brainwallets can be risky if you don't know what you are doing. You must use a strong passphrase and take security precautions to prevent loss or theft.  By using brainwallet.io, you are agreeing to our Terms of Service (below).<br>
+    <br>
+    Use a long, unique passphrase that is never used in any song, literature, or media. If you use a weak passphrase, you are at risk of having your money stolen. We recommend a minimum of 8 random words. Click the "random" button to have a secure 12-word passphrase generated for you. If you forget your passphrase, your cryptocurrency will be lost forever, so please write down your passphrase and salts.  <br>
+    <br>
+    Your <a href="https://en.wikipedia.org/wiki/Salt_(cryptography)" target="_blank">salts</a> are used as additional inputs to the cryptographic function that generates your brainwallet. This information never gets sent or stored anywhere, and is only used to strengthen your passphrase. You are required to enter at least one salt, and you have the ability to choose between different types of salts. There is no recovery process, so don't forget what you enter.<br>
+    <br>
+    Instead of typing a passphrase, you can use any file as your passphrase by selecting a file, or by dragging the file to the passphrase field.  Your browser performs an SHA256 hash operation on the file to derive a checksum, which is used as your passphrase. The file hashing takes place in your browser, and the file is never uploaded. It's important to never use a file that exists on the internet, and to keep it stored securely.  We recommend using a photograph that you have taken.<br>
+    <br>
+    Brainwallet.io uses the <a href="https://en.wikipedia.org/wiki/Scrypt" target="_blank">scrypt</a> key derivation function to generate cryptocurrency keys.  Your salt inputs are concatenated and used as the salt for the scrypt function.<br>
+    <br>
+    The process is as follows (pseudocode):<br>
+    <li>key = scrypt(passphrase, salt, N=2<sup>18</sup>, r=8, p=1, dkLen=32)</li>
+    <li>keypair = generate_keypair(sha256(key))</li>
+    <br>
+    Scrypt is a memory-intensive function that is deliberately slow to frustrate brute-force attacks.  Performance may vary depending on your hardware, and in some cases may not work at all.  If you run into problems, try a different web browser or a newer computer.  We can't sacrifice security for legacy support.<br>
+    <br>
+    Brainwallet.io is a self-contained website that can be run offline.  We recommend that you download the latest HTML file from GitHub, verify file integrity (checksum) with the PGP-signed changelog, and run it on an offline computer.  Keep a copy of the HTML file that you used to generate your brainwallet with for safekeeping.<br>
+    <br>
+  </p>
+  <p class="infoheader">Terms of Service</p>
+  <p>
+    These Terms of Service (“Terms”) govern your access to and use of brainwallet.io (“Service”), and any information, text, links, graphics, photos, videos, or other materials uploaded, downloaded or appearing on the Service (collectively referred to as “Content”). By using the Service you agree to be bound by these Terms.<br>
+    <br>
+    You are responsible for your use of this Service and for any Content you provide, including compliance with applicable laws, rules, and regulations. Your access to and use of the Service or any Content are at your own risk. You understand and agree that the Service is provided to you on an “AS IS” and “AS AVAILABLE” basis.<br>
+    <br>
+    In no event shall brainwallet.io be held liable for anything arising out of or in any way connected with your use of this Service whether such liability is under contract. Brainwallet.io shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this Service.<br>
+    <br>
+    Brainwallet.io is not responsible for any losses in cryptocurrency that you may incur for any reason.<br>
+    <br>
+    We reserve the right to modify or terminate the Service for any reason, without notice at any time. We reserve the right to alter these Terms at any time.<br>
+    <br>
+  </p>
+  <p class="infoheader">Created by</p>
+  <p>
+    Daniel Routman<br>
+    <a href="mailto:daniel@ncrypt.org">daniel@ncrypt.org</a><br>
+    <br>
+    <a href="https://brainwallet.io/pgpkey.asc" target="_blank">PGP key</a><br>
+    EB6E BB0A 6C1B 762F B282<br>
+    A38A DE5F 7DB2 1B0B 3CCA<br>
+    <br>
+    Donations are greatly appreciated!<br>
+    BTC: bc1q7fqwmtq2vaka8wwpjpnmlehe36qrgfmlw33vh9<br>
+    LTC: LYMSJ313xJaUsAmucuYRkVJmGB8Ut9VDz8<br>
+    <br>
+    Brainwallet.io is licensed under The MIT License (MIT)
+  </p>
 </div>
-<div id="footer" class="outer">
-	<div class="inner">
-        <a href="https://brainwallet.io/changelog.txt" target="_blank">Changelog</a>
-				<a href="https://github.com/routman/brainwallet.io" target="_blank">Source</a>
-				<p>brainwallet.io &copy 2015-<script>document.write(new Date().getFullYear())</script></p>
-		</div>
-	</div>
+<div id="footer">
+  <p>Brainwallet.io is a deterministic cryptocurrency address generator for Bitcoin and Litecoin that converts any text or file into a private key and public address, allowing you to store cryptocurrency on paper, in a password manager, within a photograph or document, or in your brain by memorizing the passphrase and salts.</p>
+  <p>Key generation takes place in your browser, and the information you enter is never sent or stored anywhere. For your privacy and security, this website is open source and has no ads, cookies, or analytics.</p>
+  <p>brainwallet.io &copy 2015-<script>document.write(new Date().getFullYear())</script></p>
+  <a href="https://github.com/routman/brainwallet.io" target="_blank" rel="noopener">source</a>
+  <a href="https://ncrypt.org" target="_blank" rel="noopener">ncrypt</a>
+  <a href="https://cryptoji.com" target="_blank" rel="noopener">cryptoji</a>
+  <a href="https://publicnote.com" target="_blank" rel="noopener">publicnote</a>
 </div>
 </body>
 </html>
