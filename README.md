@@ -17,7 +17,7 @@ Brainwallet.io uses the scrypt key derivation function to generate cryptocurrenc
 
 The process is as follows (pseudocode):
 
-key = scrypt(passphrase, salt, N=218, r=8, p=1, dkLen=32)
+key = scrypt(passphrase, salt, N=2^18, r=8, p=1, dkLen=32)
 keypair = generate_keypair(sha256(key))
 
 Scrypt is a memory-intensive function that is deliberately slow to frustrate brute-force attacks. Performance may vary depending on your hardware, and in some cases may not work at all. If you run into problems, try a different web browser or a newer computer. We can't sacrifice security for legacy support.
