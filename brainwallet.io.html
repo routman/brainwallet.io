@@ -127,23 +127,22 @@ textarea, input {
 	border: 1px solid #444444;
   caret-color: #444444;
 	box-sizing: border-box;
-  padding: 10px;
-  box-shadow: 1px 1px 0px 0px #e69ec0;
+  padding: 12px;
+  box-shadow: 1px 1px 0px 0px #e6006f80;
 }
-
 textarea:focus, input:focus{
   outline: none;
   border: 2px solid #444444;
   border-image: linear-gradient(to right, #00d8ba 0%, #e6006e 100%);
   border-image-slice: 1;
-  box-shadow: 2px 2px 0px 0px #e69ec0;
+  box-shadow: 2px 2px 0px 0px #e6006f80;
+  padding: 11px;
 }
 
 #passphrase {
 	width: 100%;
 	max-width: 100%;
 	height: 120px;
-	padding: 10px;
 	font-size: 16px;
 }
 
@@ -218,7 +217,10 @@ textarea:focus, input:focus{
 	background: #FFFFFF;
 	clear: both;
   border: 1px solid #444444;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 0px 0px #e6006f80;
 }
+
 .currencybutton {
 	width: 50%;
 	line-height: 48px;
@@ -236,6 +238,8 @@ textarea:focus, input:focus{
 	width: 420px;
 	clear: both;
   border: 1px solid #444444;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 0px 0px #e6006f80;
 }
 
 #login,#personal, #ltc {
@@ -266,7 +270,6 @@ textarea:focus, input:focus{
 	width: 100%;
 	height: 48px;
 	margin: 0;
-	padding: 8px 12px;
 	font-size: 16px;
 }
 
@@ -366,7 +369,7 @@ td {
 	margin: 8px;
 	display: inline-block;
 	position: relative;
-	top: -7px;
+	top: -3px;
 }
 
 #print {
@@ -378,7 +381,7 @@ td {
 }
 
 #printbtn {
-  box-shadow: 1px 1px 0px 0px #e69ec0;
+  box-shadow: 1px 1px 0px 0px #e6006f80;
   padding: 1px;
 }
 #printbtn:focus {
@@ -408,6 +411,14 @@ td {
 	color: #e6006e;
 }
 
+.donations {
+  margin-top: -16px;
+}
+
+@media screen and (max-width: 550px) {
+	.donations {font-size: 14px;}
+}
+
 @media screen and (max-width: 444px) {
 	#mode {width: 100%;}
 	#currency {width: 100%;}
@@ -416,12 +427,18 @@ td {
 	#random {display: none;}
 	.modebutton {font-size: 14px;}
   #subtitle {font-size: 13px;}
+  .donations {font-size: 12px;}
 }
 
 @media screen and (max-width: 384px) {
 	#addr {font-size: 14px;}
 	#private {font-size: 10px;}
 	.modebutton {font-size: 13px;}
+  .donations {font-size: 10px;}
+}
+
+@media screen and (max-width: 340px) {
+  .donations {font-size: 8px;}
 }
 
 @media print {
@@ -1889,11 +1906,16 @@ d[e>>>5]|=128<<24-e%32;d[(e+64>>>9<<4)+14]=h.floor(b/4294967296);d[(e+64>>>9<<4)
 </div>
 <div id="footer">
   <p>Brainwallet.io is a deterministic cryptocurrency address generator for Bitcoin and Litecoin that converts any text or file into a private key and public address, allowing you to store cryptocurrency on paper, in a password manager, within a photograph or document, or in your brain by memorizing the passphrase and salts.</p>
+  <p>Use at your own risk. If you forget your passphrase and salts, your cryptocurrency will be lost forever.</p>
   <p>Key generation takes place in your browser, and the information you enter is never sent or stored anywhere. For your privacy and security, this website is open source and has no ads, cookies, or analytics.</p>
+  <p>Bitcoin Donations:</p>
+  <div class="donations">bc1q7fqwmtq2vaka8wwpjpnmlehe36qrgfmlw33vh9</div>
+  <p>Litecoin Donations:</p>
+  <div class="donations">LYMSJ313xJaUsAmucuYRkVJmGB8Ut9VDz8</div>
   <p>brainwallet.io &copy 2015-<script>document.write(new Date().getFullYear())</script></p>
   <a href="https://github.com/routman/brainwallet.io" target="_blank" rel="noopener">source</a>
-  <a href="https://ncrypt.org" target="_blank" rel="noopener">ncrypt</a>
-  <a href="https://cryptoji.com" target="_blank" rel="noopener">cryptoji</a>
+  <!-- <a href="https://ncrypt.org" target="_blank" rel="noopener">ncrypt</a>
+  <a href="https://cryptoji.com" target="_blank" rel="noopener">cryptoji</a> -->
   <a href="https://publicnote.com" target="_blank" rel="noopener">publicnote</a>
 </div>
 </body>
