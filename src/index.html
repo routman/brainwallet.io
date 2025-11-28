@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+	<!--
+	brainwallet.io v3.0.0
+
+	Notice of Copyrights and Licenses:
+	***********************************
+	Copyright (c) 2015-2025 by Daniel Routman - brainwallet.io
+  Donations: bc1qyw93y3zlk5ga2ku8x6rm2weyyyn3cden7nknmz
+  
+	Licensed under the MIT license
+	The brainwallet.io name and logo are not part of the open source license.
+
+	Portions of the self-contained HTML document contain JavaScript codes that are the copyrights of others. The individual copyrights are included throughout the document along with their licenses. Included JavaScript libraries are separated with HTML script tags.
+
+	Summary of JavaScript functions with a redistributable license:
+	JavaScript function     License
+	*******************     ***************
+	BitcoinJS-lib           MIT License
+	QRCode for JavaScript   MIT License
+	Mnemonic                Public Domain
+	Secure-Random           MIT License
+	scrypt-async            BSD License
+	CryptoJS v3.1.2         BSD License
+	Bech32                  MIT License
+	js-sha3 (Keccak-256)    MIT License
+	argon2-browser          MIT License
+
+	The brainwallet.io software is available under The MIT License (MIT)
+	Copyright (c) 2015-2025 by Daniel Routman - brainwallet.io
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	SOFTWARE.
+
+	-->
+	<title>Brainwallet.io - Deterministic Cryptocurrency Address Generator</title>
+	<meta name="description" content="Open source client-side deterministic cryptocurrency wallet generator for Bitcoin, Litecoin, Ethereum, and Dogecoin. Generate paper wallets and cold storage using Argon2id KDF."/>
+	<meta name="keywords" content="brainwallet, bitcoin, litecoin, ethereum, dogecoin, cryptocurrency, paper wallet, cold storage, argon2, deterministic wallet, offline wallet generator">
+	<meta name="author" content="Daniel Routman">
+	<meta name="copyright" content="2015-2025 Daniel Routman">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="theme-color" content="#892eff">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	
+	<!-- Open Graph / Facebook / LinkedIn -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://brainwallet.io">
+	<meta property="og:title" content="Brainwallet.io - Deterministic Cryptocurrency Address Generator">
+	<meta property="og:description" content="Open source client-side cryptocurrency wallet generator for Bitcoin, Litecoin, Ethereum, and Dogecoin. Secure offline paper wallet and cold storage solution.">
+	<meta property="og:site_name" content="Brainwallet.io">
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Brainwallet.io - Cryptocurrency Wallet Generator">
+	<meta name="twitter:description" content="Generate deterministic crypto wallets for BTC, LTC, ETH, and DOGE using Argon2id KDF. Open source and runs entirely offline.">
+	
+	<!-- Canonical URL -->
+	<link rel="canonical" href="https://brainwallet.io">
+
+  <!-- Favicon (embedded SVG with brand gradient) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='150%25' y2='150%25'%3E%3Cstop offset='0%25' stop-color='%23892eff'/%3E%3Cstop offset='100%25' stop-color='%2300c1de'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' fill='url(%23grad)'/%3E%3Ctext x='50' y='72' font-family='sans-serif' font-size='64' fill='white' text-anchor='middle'%3EɃ%3C/text%3E%3C/svg%3E">
+  
+  <!-- Apple touch icon (for iOS home screen) -->
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='150%25' y2='150%25'%3E%3Cstop offset='0%25' stop-color='%23892eff'/%3E%3Cstop offset='100%25' stop-color='%2300c1de'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' rx='40' fill='url(%23g)'/%3E%3Ctext x='90' y='130' font-family='sans-serif' font-size='115' fill='white' text-anchor='middle'%3EɃ%3C/text%3E%3C/svg%3E">
+
+  <!-- CSS_PLACEHOLDER -->
+
+</head>
+<body>
+
+<div id="header">
+  <div id="title"><a href="https://brainwallet.io">brainwallet</a><a class="io" href="https://brainwallet.io">.io</a></div>
+  <div id="subtitle">Cryptocurrency Address Generator</div>
+</div>
+<div id="main">
+	<div id="content">
+    <form id="passform">
+
+      <p class="label">Currency</p>
+      <div id="currency">
+        <div id="btc" class="currencybutton active" data-short="BTC"><span class="full-text">Bitcoin</span><span class="short-text">BTC</span></div>
+        <div id="ltc" class="currencybutton" data-short="LTC"><span class="full-text">Litecoin</span><span class="short-text">LTC</span></div>
+        <div id="eth" class="currencybutton" data-short="ETH"><span class="full-text">Ethereum</span><span class="short-text">ETH</span></div>
+        <div id="doge" class="currencybutton" data-short="DOGE"><span class="full-text">Dogecoin</span><span class="short-text">DOGE</span></div>
+      </div>
+
+      <p class="label">Key Derivation Mode</p>
+      <div id="kdf-mode">
+        <button type="button" class="mode-button active" id="mode-argon2"><span class="full-text">Argon2id (Recommended)</span><span class="short-text">Argon2id</span></button>
+        <button type="button" class="mode-button" id="mode-legacy"><span class="full-text">Scrypt (Legacy)</span><span class="short-text">Scrypt</span></button>
+      </div>
+
+      <label for="passphrase" class="label">Passphrase</label>
+      <div id="random" class="action">random</div>
+      <div id="filebutton" class="action">
+        <label for="file">Select File</label>
+        <input type="file" id="file" name="file"/>
+      </div>
+      <textarea id="passphrase" class=".fd-zone" type="text" placeholder=""></textarea>
+
+      <div id="argon2salt">
+        <label for="argon2salt1" class="label">SALT (Additional Password)</label>
+        <input id="argon2salt1" class="saltinput" type="text" placeholder="">
+      </div>
+
+      <p class="label" id="salt-type-label">Salt Type</p>
+      <div id="mode">
+        <div id="generic" class="modebutton active">generic</div>
+        <div id="login" class="modebutton" >login</div>
+        <div id="personal" class="modebutton">personal</div>
+      </div>
+
+      <div id="loginsalt">
+        <label for="loginsalt1" class="label">Username</label>
+        <input id="loginsalt1" class="saltinput" type="text" placeholder="">
+        <label for="loginsalt2" class="label">Password</label>
+        <input id="loginsalt2" class="saltinput" type="text" placeholder="">
+        <label for="loginsalt3" class="label">4-6 Digit PIN</label>
+        <input id="loginsalt3" class="saltinput" type="text" placeholder="">
+      </div>
+
+      <div id="personalsalt">
+        <label for="personalsalt1" class="label">Name</label>
+        <input id="personalsalt1" class="saltinput" type="text" placeholder="">
+        <label for="personalsalt2" class="label">Email</label>
+        <input id="personalsalt2" class="saltinput" type="text" placeholder="">
+        <label for="personalsalt3" class="label">Phone</label>
+        <input id="personalsalt3" class="saltinput" type="text" placeholder="">
+        <label for="personalsalt4" class="label">Date of Birth</label>
+        <input id="personalsalt4" class="saltinput" type="text" placeholder="">
+      </div>
+
+      <div id="genericsalt">
+        <label for="genericsalt1" class="label">SALT (Additional Password)</label>
+        <input id="genericsalt1" class="saltinput" type="text" placeholder="">
+      </div>
+
+      <div id="submit-wrapper">
+        <input id="submit" class="formsubmit" type="submit" value="generate">
+        <div id="spinner" style="display:none;">
+          <span class="spinner-text">Generating...</span>
+          <div class="spinner-circle"></div>
+        </div>
+      </div>
+    </form>
+    <div id="result">
+
+      <p id="printtitle">BRAINWALLET.IO</p>
+      <table id="printtable">
+        <tr>
+          <th>Currency:</th>
+          <td class="presult" id="p-currency">BTC</td>
+        </tr>
+        <tr class="passhide">
+          <th>Passphrase:</th>
+          <td class="presult" id="p-passphrase"></td>
+        </tr>
+        <tr class="salthide">
+          <th id="p-label1"></th>
+          <td class="presult" id="p-salt1"></td>
+        </tr>
+        <tr class="salthide">
+          <th id="p-label2"></th>
+          <td class="presult" id="p-salt2"></td>
+        </tr>
+        <tr class="salthide">
+          <th id="p-label3"></th>
+          <td class="presult" id="p-salt3"></td>
+        </tr>
+        <tr class="salthide">
+          <th id="p-label4"></th>
+          <td class="presult" id="p-salt4"></td>
+        </tr>
+      </table>
+
+      <p class="resultlabel">Public Address (SHARE):</p>
+      <p id="addr"></p>
+      <div id="addrQR"></div>
+      <p class="resultlabel" id="privatelabel">Private Key (SECRET):</p>
+      <p id="private"></p>
+      <div id="privateQR"></div>
+
+      <div id="poptions">
+        <p class="pheader">Printing Options</p>
+        <input type="checkbox" class="cb" id="hidepass"/><label for="hidepass" class="cblabel">Hide Passphrase</label><br>
+        <input type="checkbox" class="cb" id="hidesalt"/><label for="hidesalt" class="cblabel">Hide Salts</label><br>
+        <input type="checkbox" class="cb" id="hidepriv"/><label for="hidepriv" class="cblabel">Hide Private Key</label><br>
+        <a id="print" href="javascript:window.print()">
+          <div id="printbtn" class="formsubmit">print</div>
+        </a>
+      </div>
+    </div>
+	</div>
+</div>
+
+<div id="info-section">
+  <p class="infoheader">About</p>
+  <p>
+    Brainwallet.io is an open-source, deterministic cryptocurrency address generator for Bitcoin, Litecoin, Ethereum, and Dogecoin. It runs entirely in your web browser, serving as a secure tool for creating cold storage, paper wallets, and brainwallets. By converting any text or file into a public address and private key pair, it enables complete self-custody of your digital assets. All cryptographic operations run locally; no information is ever transmitted to any server.
+  </p>
+
+  <p class="infoheader">Security Warning</p>
+  <p>
+    <b>Disclaimer: Use at your own risk.</b> Brainwallets are inherently risky if proper security precautions are not taken.
+  </p>
+  <ul>
+    <li>Weak Passphrases: Passphrases must be strong and unique. Never use text found in books, lyrics, quotes, or religious texts. Never use Artificial Intelligence (AI) tools to generate passphrases or salts, as these inputs may be stored or learned by the model.</li>
+    <li>Brute Force: Weak inputs are vulnerable to brute-force attacks. If you use a weak passphrase, you are at risk of theft.</li>
+    <li>No Recovery: There is no "forgot password" feature. If you lose your passphrase or salts, your funds are permanently lost. Every character matters. An extra space, different capitalization, or any variation will generate a completely different address.</li>
+    <li>Offline Usage: For maximum security, download the source code from GitHub, verify the PGP signature, and run this tool on an air-gapped (offline) computer.</li>
+  </ul>
+
+  <p class="infoheader">How to Use</p>
+  <ol>
+    <li>Select Currency: Choose Bitcoin, Litecoin, Ethereum, or Dogecoin.</li>
+    <li>Select Key Derivation Function (KDF):
+      <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Argon2" target="_blank">Argon2id</a> (Recommended): A memory-hard function configured to use 384MB of RAM and 25 iterations. This process is intentionally slow (taking 10+ seconds on modern hardware) to make brute-force attacks computationally infeasible. Generates SegWit addresses for BTC/LTC (bc1q..., ltc1q...), standard addresses for ETH (0x...), and legacy P2PKH for DOGE (D...).</li>
+        <li><a href="https://en.wikipedia.org/wiki/Scrypt" target="_blank">Scrypt</a> (Legacy): Provided for backward compatibility with wallets created on older versions of this site. Generates legacy P2PKH addresses (1..., L...). Available for Bitcoin and Litecoin only.</li>
+      </ul>
+    </li>
+    <li>Enter Passphrase: A minimum of 8 random words is recommended. You may use the "random" button to generate a secure 12-word BIP39 mnemonic. Alternatively, drag and drop a file to use its SHA256 checksum as the passphrase. Do not use files that exist publicly on the internet.</li>
+    <li>Add Salt: Salts are mandatory additional inputs that strengthen the key derivation. You can choose between Generic, Login, or Personal salt types.</li>
+    <li>Generate: Click to derive your public address and private key pair.</li>
+  </ol>
+
+  <p class="infoheader">Technical Details</p>
+  <p>Argon2id mode:</p>
+  <ul>
+    <li>key = argon2id(passphrase, salt, mem=384MB, iterations=25, parallelism=1, hashLen=32)</li>
+    <li>keypair = generate_keypair(key) // uses raw Argon2 output directly</li>
+    <li>BTC/LTC: Compressed public key → P2WPKH SegWit address (bc1q..., ltc1q...)</li>
+    <li>ETH: Keccak-256 of uncompressed public key (64 bytes) → EIP-55 checksum address</li>
+    <li>DOGE: Uncompressed public key → P2PKH address (D...)</li>
+  </ul>
+  <p>Scrypt mode (legacy):</p>
+  <ul>
+    <li>key = scrypt(passphrase, salt, N=2<sup>18</sup>, r=8, p=1, dkLen=32)</li>
+    <li>keypair = generate_keypair(sha256(key)) // classic brainwallet method</li>
+    <li>BTC/LTC: Uncompressed public key → P2PKH address (1..., L...)</li>
+  </ul>
+  <p>Both functions are memory-intensive and deliberately slow to frustrate brute-force attacks. Private keys are validated against the secp256k1 curve order to ensure cryptographic correctness.</p>
+
+  <p class="infoheader">Terms of Service</p>
+  <p>
+    These Terms of Service (“Terms”) govern your access to and use of brainwallet.io (“Service”), and any information, text, links, graphics, photos, videos, or other materials uploaded, downloaded or appearing on the Service (collectively referred to as “Content”). By using the Service you agree to be bound by these Terms.
+  </p>
+  <p>
+    You are responsible for your use of this Service and for any Content you provide, including compliance with applicable laws, rules, and regulations. Your access to and use of the Service or any Content are at your own risk. You understand and agree that the Service is provided to you on an “AS IS” and “AS AVAILABLE” basis.
+  </p>
+  <p>
+    In no event shall brainwallet.io be held liable for anything arising out of or in any way connected with your use of this Service whether such liability is under contract. Brainwallet.io shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this Service.
+  </p>
+  <p>
+    Brainwallet.io is not responsible for any losses in cryptocurrency that you may incur for any reason.
+  </p>
+  <p>
+    We reserve the right to modify or terminate the Service for any reason, without notice at any time. We reserve the right to alter these Terms at any time.
+  </p>
+
+  <p class="infoheader">Development</p>
+  <p>
+    Created by Daniel Routman<br>
+    <span class="donations">bc1qyw93y3zlk5ga2ku8x6rm2weyyyn3cden7nknmz</span><br>
+    <a href="https://brainwallet.io/pgpkey.asc" target="_blank">PGP Key</a>: EB6E BB0A 6C1B 762F B282 A38A DE5F 7DB2 1B0B 3CCA<br>
+    <a href="/changelog.txt" target="_blank" rel="noopener">Changelog</a><br>
+    <a href="https://github.com/routman/brainwallet.io" target="_blank" rel="noopener">Source Code</a><br>
+  </p>
+</div>
+<div id="footer">
+  <p>brainwallet.io &copy 2015-<span id="currentYear"></span></p>
+  <script>document.getElementById('currentYear').textContent = new Date().getFullYear();</script>
+</div>
+
+  <!-- JS_PLACEHOLDER -->
+
+</body>
+</html>

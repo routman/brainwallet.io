@@ -1,43 +1,70 @@
-# brainwallet.io
-Deterministic Bitcoin and Litecoin Address Generator
+# brainwallet.io v3.0.0
+Deterministic Cryptocurrency Address Generator
 
-Brainwallet.io is a deterministic cryptocurrency address generator for Bitcoin and Litecoin that runs in your web browser. It converts any text or file into a private key and public address, allowing you to store cryptocurrency on paper, in a password manager, within a photograph or document, or in your brain by memorizing the passphrase and salts. Key generation takes place in your browser, and no information is ever sent to our server.
+**Brainwallet.io** is an open-source, deterministic cryptocurrency address generator for **Bitcoin**, **Litecoin**, **Ethereum**, and **Dogecoin**. It runs entirely in your web browser, serving as a secure tool for creating **cold storage**, **paper wallets**, and **brainwallets**. By converting any text or file into a public address and private key pair, it enables complete **self-custody** of your digital assets. All cryptographic operations run locally; no information is ever transmitted to any server.
 
-Disclaimer: Use at your own risk. Brainwallets can be risky if you don't know what you are doing. You must use a strong passphrase and take security precautions to prevent loss or theft. By using brainwallet.io, you are agreeing to our Terms of Service (below).
+## Security Warning
 
-Use a long, unique passphrase that is never used in any song, literature, or media. If you use a weak passphrase, you are at risk of having your money stolen. We recommend a minimum of 8 random words. Click the "random" button to have a secure 12-word passphrase generated for you. If you forget your passphrase, your cryptocurrency will be lost forever, so please write down your passphrase and salts. 
+**Disclaimer: Use at your own risk.** Brainwallets are inherently risky if proper security precautions are not taken.
 
-Your salts are used as additional inputs to the cryptographic function that generates your brainwallet. This information never gets sent or stored anywhere, and is only used to strengthen your passphrase. You are required to enter at least one salt, and you have the ability to choose between different types of salts. There is no recovery process, so don't forget what you enter.
+*   **Weak Passphrases:** Passphrases must be strong and unique. Never use text found in books, lyrics, quotes, or religious texts. **Never use Artificial Intelligence (AI) tools to generate passphrases or salts**, as these inputs may be stored or learned by the model.
+*   **Brute Force:** Weak inputs are vulnerable to brute-force attacks. If you use a weak passphrase, you are at risk of theft.
+*   **No Recovery:** There is no "forgot password" feature. If you lose your passphrase or salts, your funds are permanently lost.
+*   **Offline Usage:** For maximum security, download the source code from GitHub, verify the PGP signature, and run this tool on an air-gapped (offline) computer.
 
-Instead of typing a passphrase, you can use any file as your passphrase by selecting a file, or by dragging the file to the passphrase field. Your browser performs an SHA256 hash operation on the file to derive a checksum, which is used as your passphrase. The file hashing takes place in your browser, and the file is never uploaded. It's important to never use a file that exists on the internet, and to keep it stored securely. We recommend using a photograph that you have taken.
+## Key Derivation Modes
 
-Brainwallet.io is a self-contained website that can be run offline. We recommend that you download the latest HTML file from GitHub, verify file integrity (checksum) with the PGP-signed changelog, and run it on an offline computer. Keep a copy of the HTML file that you used to generate your brainwallet with for safekeeping.
-#
-Brainwallet.io uses the scrypt key derivation function to generate cryptocurrency keys. Your salt inputs are concatenated and used as the salt for the scrypt function.
+### Argon2id (Recommended)
+*   **Algorithm:** Argon2id (v1.3)
+*   **Parameters:** 384MB Memory, 25 Iterations, 1 Parallelism.
+*   **Security:** This process is intentionally slow (taking 10+ seconds on modern hardware) to make brute-force attacks computationally infeasible.
+*   **Address Types:**
+    *   **Bitcoin/Litecoin:** SegWit (Bech32) addresses (`bc1q...`, `ltc1q...`).
+    *   **Ethereum:** Standard EIP-55 checksum addresses (`0x...`).
+    *   **Dogecoin:** Legacy P2PKH addresses (`D...`).
 
-The process is as follows (pseudocode):
+### Scrypt (Legacy)
+*   **Algorithm:** Scrypt
+*   **Parameters:** N=2^18, r=8, p=1.
+*   **Purpose:** Provided for backward compatibility with wallets created on older versions of this site.
+*   **Address Types:** Generates legacy P2PKH addresses (`1...`, `L...`) for Bitcoin and Litecoin only.
 
+## Technical Details
+
+**Argon2id Mode:**
+```
+key = argon2id(passphrase, salt, mem=384MB, iterations=25, parallelism=1, hashLen=32)
+keypair = generate_keypair(key) // uses raw Argon2 output directly
+```
+
+**Scrypt Mode:**
+```
 key = scrypt(passphrase, salt, N=2^18, r=8, p=1, dkLen=32)
-keypair = generate_keypair(sha256(key))
+keypair = generate_keypair(sha256(key)) // SHA-256 applied for backward compatibility
+```
 
-Scrypt is a memory-intensive function that is deliberately slow to frustrate brute-force attacks. Performance may vary depending on your hardware, and in some cases may not work at all. If you run into problems, try a different web browser or a newer computer. We can't sacrifice security for legacy support.
-#
-TERMS OF SERVICE
+Both functions are memory-intensive. Private keys are validated against the secp256k1 curve order to ensure cryptographic correctness.
 
-These Terms of Service (“Terms”) govern your access to and use of brainwallet.io (“Service”), and any information, text, links, graphics, photos, videos, or other materials uploaded, downloaded or appearing on the Service (collectively referred to as “Content”). By using the Service you agree to be bound by these Terms.
+## Development
 
-You are responsible for your use of this Service and for any Content you provide, including compliance with applicable laws, rules, and regulations. Your access to and use of the Service or any Content are at your own risk. You understand and agree that the Service is provided to you on an “AS IS” and “AS AVAILABLE” basis.
+To build from source:
 
-In no event shall brainwallet.io be held liable for anything arising out of or in any way connected with your use of this Service whether such liability is under contract. Brainwallet.io shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this Service.
+1.  Install dependencies: `npm install`
+2.  Build the project: `npm run build`
+3.  Open `src/index.html` in your browser.
 
-Brainwallet.io is not responsible for any losses in cryptocurrency that you may incur for any reason.
+## Terms of Service
 
-We reserve the right to modify or terminate the Service for any reason, without notice at any time. We reserve the right to alter these Terms at any time.
-#
-Donations are greatly appreciated!
+These Terms of Service (“Terms”) govern your access to and use of brainwallet.io (“Service”). By using the Service you agree to be bound by these Terms.
 
-BTC: bc1q7fqwmtq2vaka8wwpjpnmlehe36qrgfmlw33vh9
+You are responsible for your use of this Service and for any Content you provide. Your access to and use of the Service are at your own risk. The Service is provided on an “AS IS” and “AS AVAILABLE” basis.
 
-LTC: LYMSJ313xJaUsAmucuYRkVJmGB8Ut9VDz8
+In no event shall brainwallet.io be held liable for anything arising out of or in any way connected with your use of this Service. Brainwallet.io is not responsible for any losses in cryptocurrency that you may incur for any reason.
 
-Brainwallet.io is licensed under The MIT License (MIT)
+## License
+
+Copyright (c) 2015-2025 Daniel Routman
+
+Licensed under The MIT License (MIT).
+
+**Donations:** `bc1qyw93y3zlk5ga2ku8x6rm2weyyyn3cden7nknmz`

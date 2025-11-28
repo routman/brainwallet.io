@@ -1,0 +1,661 @@
+:root {
+	/* Colors */
+	--color-text: #444444;
+	--color-primary: #892eff;
+	--color-accent: #00c1de;
+	--color-gray: #696d65;
+	--color-white: #FFFFFF;
+	--color-border: #202020;
+	--color-shadow: #f2e4ff;
+	
+	/* Shadows */
+	--shadow: 4px 4px 0px 0px var(--color-shadow);
+	
+	/* Borders */
+	--border-thin: 1px solid var(--color-border);
+	--border-thick: 2px solid var(--color-border);
+	--border-gradient: linear-gradient(to right, var(--color-accent) 0%, var(--color-primary) 150%);
+	
+	/* Dimensions */
+	--button-height: 60px;
+	--button-width: 220px;
+	
+	/* Typography */
+	--font-main: sans-serif;
+	--font-input: Helvetica, sans-serif;
+	--letter-spacing: 2px;
+	--font-size: 16px;
+	--font-weight: 300;
+	
+	/* Additional colors */
+	--color-light-gray: #d6d6d6;
+	--color-drag-overlay: rgba(0, 193, 222, 0.05);
+}
+
+/* Reusable gradient text class */
+.gradient-text {
+	background: linear-gradient(to right, var(--color-primary) 0%, var(--color-accent) 250%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* Reset gradient/background styling */
+.no-gradient {
+	background: none;
+	-webkit-background-clip: unset;
+	-webkit-text-fill-color: unset;
+	background-clip: unset;
+}
+
+/* Shared Styles */
+
+a {
+	text-decoration: none;
+}
+
+a,
+a:visited {
+	background: linear-gradient(to right, var(--color-primary) 0%, var(--color-accent) 250%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* Box containers with border and shadow */
+#currency,
+#mode,
+#kdf-mode,
+textarea,
+input {
+	background: var(--color-white);
+	border: var(--border-thin);
+	box-sizing: border-box;
+	box-shadow: var(--shadow);
+}
+
+/* Interactive buttons - hover and active states */
+.action,
+.formsubmit,
+.currencybutton,
+.modebutton,
+.mode-button {
+	cursor: pointer;
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+.action:hover,
+.formsubmit:hover,
+.currencybutton:hover,
+.modebutton:hover,
+.mode-button:hover,
+#info:hover,
+#submit:hover {
+	color: var(--color-accent);
+}
+
+.action:active,
+.formsubmit:active,
+.currencybutton:active,
+.modebutton:active,
+.mode-button:active {
+	color: var(--color-primary);
+}
+
+/* Button-like elements with standard height */
+.currencybutton,
+.modebutton,
+.mode-button,
+.formsubmit {
+	line-height: var(--button-height);
+}
+
+/* Active state color */
+.active,
+.mode-button.active {
+	background: linear-gradient(to right, var(--color-primary) 0%, var(--color-accent) 150%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+#footer a {
+	color: var(--color-primary);
+}
+
+/* Focused/active border gradient */
+textarea:focus,
+input:focus,
+#submit:focus,
+#printbtn:focus {
+	border: var(--border-thick);
+	border-image: var(--border-gradient);
+	border-image-slice: 1;
+	box-shadow: var(--shadow);
+}
+
+body {
+	margin: 20px;
+	max-width: 1080px;
+	height: auto;
+	font-family: var(--font-main);
+	letter-spacing: var(--letter-spacing);
+	text-transform: uppercase;
+	color: var(--color-text);
+	font-size: var(--font-size);
+	font-weight: var(--font-weight);
+}
+
+@media screen and (min-width: 1120px) {
+	body {
+		margin: 20px auto;
+	}
+}
+
+.io {
+  background: linear-gradient(to right, var(--color-primary) 0%, var(--color-accent) 150%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+#header a,
+#header a:visited {
+  	text-decoration: none;
+  	color: var(--color-text);
+	background: none;
+	-webkit-background-clip: unset;
+	-webkit-text-fill-color: unset;
+	background-clip: unset;
+}
+
+#header {
+  position: relative;
+}
+
+#title {
+	display: inline-block;
+  font-size: 22px;
+  line-height: 38px;
+  letter-spacing: 6px;
+}
+
+#subtitle {
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+#info {
+	color: var(--color-gray);
+	display: inline-block;
+	float: right;
+  font-size: 20px;
+  line-height: 38px;
+}
+#info:hover {
+	cursor: pointer;
+}
+
+.label {
+	clear: both;
+	float: left;
+	margin: 40px 0 8px 0;
+}
+
+.infoheader {
+	letter-spacing: var(--letter-spacing);
+	text-transform: uppercase;
+	margin: 24px 0 -4px 0;
+}
+
+textarea, input {
+	font-family: var(--font-input);
+	color: var(--color-text);
+  caret-color: var(--color-text);
+  padding: 16px;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+textarea:focus, input:focus{
+  outline: none;
+  padding: 15px;
+}
+
+#passphrase {
+	width: 100%;
+	max-width: 100%;
+	height: 88px;
+	font-size: 16px;
+}
+
+#passphrase.drag-over {
+	border: var(--border-thick);
+	border-image: var(--border-gradient);
+	border-image-slice: 1;
+	background: var(--color-drag-overlay);
+	padding: 15px;
+}
+
+.action {
+	display: inline-block;
+	float: right;
+	margin: 40px 0 8px 24px;
+}
+
+.formsubmit {
+	width: var(--button-width);
+	background: var(--color-white);
+	color: var(--color-text);
+  border: var(--border-thin);
+	font-size: var(--font-size);
+  font-weight: var(--font-weight);
+	padding: 0;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+#filebutton {
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+#file {
+	display: block !important;
+	width: 100px !important;
+	height: 40px !important;
+	opacity: 0 !important;
+	overflow: hidden !important;
+	filter: alpha(opacity=0);
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+}
+
+#currency {
+	display: flex;
+	width: 100%;
+	clear: both;
+}
+
+.currencybutton {
+	flex: 1;
+	text-align: center;
+}
+
+.currencybutton:not(:first-child) {
+	border-left: var(--border-thin);
+}
+
+#mode {
+	display: flex;
+	width: 100%;
+	clear: both;
+}
+
+#mode[style*="display: none"] {
+	display: none !important;
+}
+
+.modebutton {
+	flex: 1;
+	text-align: center;
+}
+
+.modebutton:not(:first-child) {
+	border-left: var(--border-thin);
+}
+
+/* Ensure active salt type buttons show gradient on white background */
+.modebutton.active {
+	background: linear-gradient(to right, var(--color-primary) 0%, var(--color-accent) 150%) !important;
+	-webkit-background-clip: text !important;
+	-webkit-text-fill-color: transparent !important;
+	background-clip: text !important;
+}
+
+.saltinput {
+	display: block;
+	width: 100%;
+	height: var(--button-height);
+	margin: 0;
+	font-size: var(--font-size);
+}
+
+#personalsalt, #loginsalt {
+	display: none;
+}
+
+/* KDF Mode Selector */
+#kdf-mode {
+	overflow: auto;
+	width: 100%;
+	clear: both;
+}
+
+.mode-button {
+	width: 50%;
+	float: left;
+	background: none;
+	text-align: center;
+	border: none;
+	font-family: var(--font-main);
+	letter-spacing: var(--letter-spacing);
+	text-transform: uppercase;
+	color: var(--color-text);
+	font-size: var(--font-size);
+	font-weight: var(--font-weight);
+	padding: 0;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.mode-button:first-child {
+	border-right: var(--border-thin);
+	box-sizing: border-box;
+}
+
+#submit {
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing);
+	padding: 0px;
+	border: var(--border-thick);
+  border-image: var(--border-gradient);
+  border-image-slice: 1;
+	box-shadow: var(--shadow);
+	height: 64px;
+}
+
+
+/* Spinner */
+#submit-wrapper {
+	position: relative;
+	margin-top: 60px;
+	margin-bottom: 40px;
+}
+
+#spinner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: var(--button-width);
+	height: 64px;
+	background: var(--color-white);
+	/* color: var(--color-primary); */
+	font-family: var(--font-main);
+	font-size: var(--font-size);
+	font-weight: var(--font-weight);
+	padding: 0;
+	box-sizing: border-box;
+	cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+	display: none;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	border: var(--border-thick);
+	border-image: var(--border-gradient);
+	border-image-slice: 1;
+	box-shadow: var(--shadow);
+	gap: 8px;
+	text-transform: uppercase;
+	letter-spacing: var(--letter-spacing);
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+.spinner-text {
+	white-space: nowrap;
+	line-height: normal;
+	background: linear-gradient(to right, var(--color-primary) 0%, var(--color-accent) 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.spinner-circle {
+	border: 3px solid var(--color-light-gray);
+	border-top: 3px solid var(--color-primary);
+	border-radius: 50%;
+	width: 16px;
+	height: 16px;
+	animation: spin 1s linear infinite;
+	flex-shrink: 0;
+	line-height: normal;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+#result {
+  	display: none;
+}
+
+.resultlabel {
+	margin: 32px 0 4px 0;
+	font-size: 20px;
+}
+
+#addr {
+  margin: 8px 0 12px 0;
+  font-size: 18px;
+	letter-spacing: 0px;
+	text-transform: none;
+}
+
+#private {
+	margin: 8px 0 12px 0;
+	letter-spacing: 0px;
+	text-transform: none;
+	font-size: 18px;
+}
+
+#printtitle {
+	display: none;
+	font-size: 18px;
+	clear: both;
+}
+#printtable {
+	display: none;
+	margin-bottom: -16px;
+}
+
+th {
+	width: 180px;
+	padding: 8px 0;
+	text-align: left;
+	vertical-align: top;
+	letter-spacing: var(--letter-spacing);
+}
+
+td {
+	padding: 8px 0;
+}
+
+.presult {
+	text-transform: none;
+	display: inline-block;
+}
+
+.pheader {
+	font-size: 18px;
+	clear: both;
+	margin: 48px 0 12px 0;
+}
+
+.cb {
+	width: 24px !important;
+	height: 24px !important;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: var(--border-thin);
+	background: var(--color-white);
+	cursor: pointer;
+	border-radius: 0;
+	padding: 0 !important;
+	margin: 0;
+}
+
+.cb:checked {
+	position: relative;
+}
+
+.cb:checked::after {
+	content: '✓';
+	color: var(--color-primary);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 14px;
+}
+
+.cblabel {
+	font-size: 15px;
+	margin: 20px 12px 20px 12px;
+	display: inline-block;
+	position: relative;
+	top: -6px;
+}
+
+#print {
+	display: block;
+	text-decoration: none;
+	color: var(--color-text);
+	margin: 20px 0 40px 0;
+	text-align: center;
+	background: none;
+	-webkit-background-clip: unset;
+	-webkit-text-fill-color: unset;
+	background-clip: unset;
+}
+
+#printbtn {
+  border: var(--border-thick);
+  border-image: var(--border-gradient);
+  border-image-slice: 1;
+  box-shadow: var(--shadow);
+  padding: 0px;
+}
+#printbtn:focus {
+  padding: 0px;
+}
+
+#info-section {
+	width: 100%;
+	text-transform: none;
+	letter-spacing: 0px;
+	font-size: 18px;
+	margin-top: 72px;
+}
+
+#info-section p {
+	line-height: 1.6;
+	margin-bottom: 16px;
+}
+
+#info-section ol,
+#info-section ul {
+	line-height: 1.6;
+	margin: 16px 0;
+	padding-left: 40px;
+}
+
+#info-section ol li,
+#info-section ul li {
+	margin-bottom: 12px;
+}
+
+#info-section ul ul {
+	margin-top: 8px;
+	margin-bottom: 12px;
+}
+
+#info-section br + br {
+	display: block;
+	margin-bottom: 8px;
+	content: "";
+}
+
+#footer {
+  font-size: 18px;
+	margin-top: 40px;
+	margin-bottom: 20px;
+  text-transform: none;
+}
+#footer a {
+	margin: 0 32px 20px 0;
+	display: inline-block;
+}
+
+@media screen and (max-width: 799px) {
+	.currencybutton .full-text,
+	.mode-button .full-text {
+		display: none;
+	}
+	.currencybutton .short-text,
+	.mode-button .short-text {
+		display: inline;
+	}
+}
+
+@media screen and (min-width: 800px) {
+	.currencybutton .short-text,
+	.mode-button .short-text {
+		display: none;
+	}
+	.currencybutton .full-text,
+	.mode-button .full-text {
+		display: inline;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	#private {font-size: 14px;}
+}
+
+@media screen and (max-width: 444px) {
+	#addr {font-size: 16px;}
+	#private {font-size: 12px;}
+	#random {display: none;}
+	.modebutton {font-size: 14px;}
+	#subtitle {font-size: 13px;}
+}
+
+@media screen and (max-width: 384px) {
+	#addr {font-size: 14px;}
+	#private {font-size: 10px;}
+	.modebutton {font-size: 13px;}
+}
+
+
+@media print {
+	#header, #passform, #progressbar, #poptions, #info-section, #footer {
+		display:none;
+	}
+	body {
+		background: white;
+	}
+	#printtitle {
+		display: block;
+	}
+	#printtable {
+		display: block;
+		letter-spacing: 0px;
+	}
+	#result {
+		margin: 64px;
+	}
+	@page {
+	    size: auto;   /* auto is the initial value */
+	    margin: 0;  /* this affects the margin in the printer settings */
+	}
+}
