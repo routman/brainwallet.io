@@ -244,7 +244,18 @@
         var r = new FileReader();
         r.readAsArrayBuffer(file);
         r.onloadend = function () {
-            var wordArray = CryptoJS.lib.WordArray.create(r.result);
+            // Convert ArrayBuffer to WordArray properly
+            var arrayBuffer = r.result;
+            var uint8Array = new Uint8Array(arrayBuffer);
+            var words = [];
+            for (var i = 0; i < uint8Array.length; i += 4) {
+                var word = (uint8Array[i] << 24) | 
+                          (uint8Array[i + 1] << 16) | 
+                          (uint8Array[i + 2] << 8) | 
+                          (uint8Array[i + 3]);
+                words.push(word);
+            }
+            var wordArray = CryptoJS.lib.WordArray.create(words, uint8Array.length);
             var filehash = CryptoJS.SHA256(wordArray).toString().toUpperCase();
             document.getElementById('passphrase').value = filehash;
         }
