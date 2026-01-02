@@ -1,4 +1,4 @@
-# brainwallet.io v3.0.0
+# brainwallet.io v3.0.1
 Deterministic Cryptocurrency Address Generator
 
 **Brainwallet.io** is an open-source, deterministic cryptocurrency address generator for **Bitcoin**, **Litecoin**, **Ethereum**, and **Dogecoin**. It runs entirely in your web browser, serving as a secure tool for creating **cold storage**, **paper wallets**, and **brainwallets**. By converting any text or file into a public address and private key pair, it enables complete **self-custody** of your digital assets. All cryptographic operations run locally; no information is ever transmitted to any server.
@@ -63,7 +63,7 @@ In no event shall brainwallet.io be held liable for anything arising out of or i
 
 ## License
 
-Copyright (c) 2015-2025 Daniel Routman
+Copyright (c) 2015-2026 Daniel Routman
 
 Licensed under The MIT License (MIT).
 
